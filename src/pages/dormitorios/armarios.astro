@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['dormitorios-armarios'] ?? [];
+---
+
+<Layout
+  title="Armarios | Muebles Fran Barcelona"
+  description="Los armarios son fundamentales para mantener el orden y la armonía en el dormitorio. En Muebles Fran disponemos de una extensa galería de armarios con"
+>
+  <GaleriaCategoria
+    titulo="Armarios"
+    tag="Dormitorios · Armarios"
+    subtitulo="Armarios para el dormitorio"
+    parrafos={[
+      'Los armarios son fundamentales para mantener el orden y la armonía en el dormitorio. En Muebles Fran disponemos de una extensa galería de armarios con puertas correderas y batientes, en acabados de madera, lacado mate y más.',
+      'Con más de 100 modelos en nuestra exposición, encontrarás el armario perfecto para cualquier espacio. También ofrecemos soluciones a medida para aprovechar al máximo los rincones de tu habitación.',
+    ]}
+    caracteristicas={[
+      'Más de 100 modelos en exposición',
+      'Puertas correderas y batientes',
+      'Interiores completamente equipados',
+      'Acabados: madera, lacado, roble, nogal',
+      'Montaje e instalación profesional',
+    ]}
+    imagenPrincipal={`/img/gallery/dormitorios-armarios/${imagenes[0] ?? ''}` }
+    imagenAlt="Armarios en Muebles Fran Barcelona"
+    reverse={true}
+    galeriaFolder="dormitorios-armarios"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Dormitorios', href: '/dormitorios' },
+    ]}
+  />
+</Layout>

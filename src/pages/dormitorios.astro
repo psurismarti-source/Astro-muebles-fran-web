@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const subcategorias = [
+  { label: 'Ambientes', href: '/dormitorios/ambientes', img: '/img/gallery/dormitorios-ambientes/dor-amb-1.jpg' },
+  { label: 'Armarios', href: '/dormitorios/armarios', img: '/img/gallery/dormitorios-armarios/arm-amb-1.jpg' },
+  { label: 'Armarios a Medida', href: '/dormitorios/armarios-medida', img: '/img/gallery/dormitorios-armarios/arm-amb-5.jpg' },
+  { label: 'Vestidores', href: '/dormitorios/vestidores', img: '/img/gallery/dormitorio-vestidores/vest-amb-1.jpg' },
+  { label: 'Dormitorios Arlex', href: '/dormitorios/arlex', img: '/img/gallery/dormitorios-ambientes/0001-Arlex-001.jpg' },
+];
+---
+
+<Layout title="Dormitorios | Muebles Fran Barcelona" description="Dormitorios, armarios, vestidores y colección Arlex en Barcelona. Exposición en Muebles Fran, Gran Vía 1105.">
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-hero-tag">Muebles</span>
+      <h1>Dormitorios</h1>
+    </div>
+  </div>
+
+  <section class="category-hub">
+    <div class="container">
+      <p class="category-hub-desc">
+        Amplia selección de dormitorios completos, armarios con puertas correderas y batientes, vestidores a medida y la exclusiva colección Arlex. Visítanos en Barcelona.
+      </p>
+      <div class="category-grid">
+        {subcategorias.map(cat => (
+          <a href={cat.href} class="category-card">
+            <div class="category-card-img">
+              <img src={cat.img} alt={cat.label} loading="lazy" />
+            </div>
+            <div class="category-card-label">{cat.label}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>

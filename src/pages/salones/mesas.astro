@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['salones-mesas'] ?? [];
+---
+
+<Layout
+  title="Mesas de Comedor | Muebles Fran Barcelona"
+  description="Colección de mesas de comedor fijas y extensibles en madera maciza, cristal, cerámica y lacado. Para espacios pequeños y grandes comedores."
+>
+  <GaleriaCategoria
+    titulo="Mesas de Comedor"
+    tag="Salones · Mesas"
+    subtitulo="Mesas de comedor para cada espacio"
+    parrafos={[
+      'Colección de mesas de comedor fijas y extensibles en madera maciza, cristal, cerámica y lacado. Para espacios pequeños y grandes comedores.',
+      'Combinables con nuestras sillas y sillones de comedor. Consulta disponibilidad de medidas y acabados.',
+    ]}
+    caracteristicas={[
+      'Mesas fijas y extensibles',
+      'Materiales: madera, cerámica, cristal, lacado',
+      'Para 4, 6 y 8 comensales',
+      'Medidas personalizables bajo pedido',
+      'Combinables con sillas de la exposición',
+    ]}
+    imagenPrincipal={`/img/gallery/salones-mesas/${imagenes[0] ?? ''}` }
+    imagenAlt="Mesas de Comedor en Muebles Fran Barcelona"
+    reverse={false}
+    galeriaFolder="salones-mesas"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Salones', href: '/salones' },
+    ]}
+  />
+</Layout>

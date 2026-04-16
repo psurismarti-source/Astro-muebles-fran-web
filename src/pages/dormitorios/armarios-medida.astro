@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['dormitorios-armarios'] ?? [];
+---
+
+<Layout
+  title="Armarios a Medida | Muebles Fran Barcelona"
+  description="Los armarios a medida son la solución perfecta para espacios irregulares, techos inclinados o rincones difíciles. Diseñamos y fabricamos tu armario aj"
+>
+  <GaleriaCategoria
+    titulo="Armarios a Medida"
+    tag="Dormitorios · Armarios a Medida"
+    subtitulo="Aprovecha cada centímetro de tu espacio"
+    parrafos={[
+      'Los armarios a medida son la solución perfecta para espacios irregulares, techos inclinados o rincones difíciles. Diseñamos y fabricamos tu armario ajustado exactamente a tus necesidades.',
+      'Nuestros especialistas visitan tu hogar, toman medidas y te proponen la mejor distribución interior para maximizar el almacenaje.',
+    ]}
+    caracteristicas={[
+      'Medición y presupuesto gratuito en Barcelona',
+      'Diseño personalizado de interior',
+      'Puertas correderas, batientes o abatibles',
+      'Múltiples acabados y colores',
+      'Instalación incluida',
+    ]}
+    imagenPrincipal={`/img/gallery/dormitorios-armarios/${imagenes[0] ?? ''}` }
+    imagenAlt="Armarios a Medida en Muebles Fran Barcelona"
+    reverse={false}
+    galeriaFolder="dormitorios-armarios"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Dormitorios', href: '/dormitorios' },
+    ]}
+  />
+</Layout>

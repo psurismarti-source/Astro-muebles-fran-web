@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['salones-muebles-tv'] ?? [];
+---
+
+<Layout
+  title="Muebles de TV | Muebles Fran Barcelona"
+  description="Muebles de televisión bajos y módulos de salón para organizar el espacio alrededor de la pantalla. Con cajones, baldas y huecos para aparatos."
+>
+  <GaleriaCategoria
+    titulo="Muebles de TV"
+    tag="Salones · Muebles TV"
+    subtitulo="El centro del salón, bien organizado"
+    parrafos={[
+      'Muebles de televisión bajos y módulos de salón para organizar el espacio alrededor de la pantalla. Con cajones, baldas y huecos para aparatos.',
+      'Disponibles en acabados naturales y lacados para adaptarse a cualquier decoración.',
+    ]}
+    caracteristicas={[
+      'Módulos bajos y composiciones',
+      'Huecos para aparatos y cables',
+      'Acabados: roble, nogal, lacado',
+      'Combinables con estanterías',
+      'Medidas personalizables',
+    ]}
+    imagenPrincipal={`/img/gallery/salones-muebles-tv/${imagenes[0] ?? ''}` }
+    imagenAlt="Muebles de TV en Muebles Fran Barcelona"
+    reverse={false}
+    galeriaFolder="salones-muebles-tv"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Salones', href: '/salones' },
+    ]}
+  />
+</Layout>

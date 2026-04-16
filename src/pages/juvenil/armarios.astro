@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['juvenil-ambientes'] ?? [];
+---
+
+<Layout
+  title="Armarios Juveniles | Muebles Fran Barcelona"
+  description="Armarios juveniles coordinados con el resto del dormitorio. Modelos de 2, 3 y 4 puertas con interiores adaptados para ropa joven: cajones, zapatero y "
+>
+  <GaleriaCategoria
+    titulo="Armarios Juveniles"
+    tag="Juvenil · Armarios"
+    subtitulo="Armarios funcionales para habitaciones juveniles"
+    parrafos={[
+      'Armarios juveniles coordinados con el resto del dormitorio. Modelos de 2, 3 y 4 puertas con interiores adaptados para ropa joven: cajones, zapatero y colgadores largos y cortos.',
+      'Disponibles en los mismos acabados que las camas y escritorios juveniles para crear composiciones perfectamente coordinadas.',
+    ]}
+    caracteristicas={[
+      'Coordinados con camas y escritorios',
+      'De 2, 3 y 4 puertas',
+      'Puertas correderas y batientes',
+      'Interiores adaptados a ropa joven',
+      'Múltiples acabados disponibles',
+    ]}
+    imagenPrincipal={`/img/gallery/juvenil-ambientes/${imagenes[0] ?? ''}` }
+    imagenAlt="Armarios Juveniles en Muebles Fran Barcelona"
+    reverse={false}
+    galeriaFolder="juvenil-ambientes"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Juvenil', href: '/juvenil' },
+    ]}
+  />
+</Layout>

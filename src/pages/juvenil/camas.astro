@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['juvenil-camas-abatibles'] ?? [];
+---
+
+<Layout
+  title="Camas Abatibles | Muebles Fran Barcelona"
+  description="Las camas abatibles son la solución perfecta para habitaciones pequeñas. De día el espacio queda libre para estudiar o jugar; de noche se despliega un"
+>
+  <GaleriaCategoria
+    titulo="Camas Abatibles"
+    tag="Juvenil · Camas Abatibles"
+    subtitulo="Gana espacio con las camas abatibles"
+    parrafos={[
+      'Las camas abatibles son la solución perfecta para habitaciones pequeñas. De día el espacio queda libre para estudiar o jugar; de noche se despliega una cama cómoda y completa.',
+      'Disponemos de modelos verticales y horizontales, simples y con escritorio integrado, para camas de 90 y 105 cm.',
+    ]}
+    caracteristicas={[
+      'Más de 40 modelos en exposición',
+      'Abatibles verticales y horizontales',
+      'Con escritorio y estanterías integradas',
+      'Para camas de 90 y 105 cm',
+      'Mecanismo de gas de alta seguridad',
+    ]}
+    imagenPrincipal={`/img/gallery/juvenil-camas-abatibles/${imagenes[0] ?? ''}` }
+    imagenAlt="Camas Abatibles en Muebles Fran Barcelona"
+    reverse={true}
+    galeriaFolder="juvenil-camas-abatibles"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Juvenil', href: '/juvenil' },
+    ]}
+  />
+</Layout>

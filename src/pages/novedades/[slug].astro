@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { sanityClient, QUERY_NOTICIA_BY_SLUG, QUERY_NOTICIAS_SLUGS } from '../../lib/sanityClient';
+
+export async function getStaticPaths() {
+  // Cuando hayas configurado Sanity, descomenta:
+  // const slugs = await sanityClient.fetch(QUERY_NOTICIAS_SLUGS);
+  // return slugs.map((item: { slug: string }) => ({ params: { slug: item.slug } }));
+  return []; // placeholder hasta conectar Sanity
+}
+
+const { slug } = Astro.params;
+
+// Cuando hayas configurado Sanity, descomenta:
+// const noticia = await sanityClient.fetch(QUERY_NOTICIA_BY_SLUG, { slug });
+const noticia: any = null; // placeholder
+
+if (!noticia) {
+  return Astro.redirect('/novedades');
+}
+
+function formatFecha(iso: string) {
+  return new Date(iso).toLocaleDateString('es-ES', {
+    day: 'numeric', month: 'long', year: 'numeric',
+  });
+}
+---
+
+<Layout
+  title={`${noticia.titulo} | Muebles Fran Barcelona`}
+  description={noticia.resumen ?? ''}
+  ogImage={noticia.imagen?.asset?.url}
+>
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-hero-tag">Blog · Novedades</span>
+      <h1>{noticia.titulo}</h1>
+      {noticia.fecha && <time class="page-hero-date">{formatFecha(noticia.fecha)}</time>}
+    </div>
+  </div>
+
+  <article style="max-width: 780px; margin: 4rem auto; padding: 0 1.5rem;">
+
+    {noticia.imagen?.asset?.url && (
+      <img
+        src={noticia.imagen.asset.url + '?w=1200&auto=format'}
+        alt={noticia.titulo}
+        style="width:100%; border-radius:8px; margin-bottom:2.5rem;"
+      />
+    )}
+
+    <!-- Portable Text — instala @portabletext/astro para renderizado rico -->
+    <!-- Por ahora renderizamos el contenido crudo como texto -->
+    {noticia.contenido && (
+      <div class="blog-content">
+        {/* TODO: Usar <PortableText> de @portabletext/astro para renderizado completo */}
+        <p>{JSON.stringify(noticia.contenido)}</p>
+      </div>
+    )}
+
+    <div style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
+      <a href="/novedades" style="color: inherit;">← Volver a Novedades</a>
+    </div>
+
+  </article>
+
+</Layout>

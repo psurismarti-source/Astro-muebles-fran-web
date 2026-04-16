@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const subcategorias = [
+  { label: 'Ambientes', href: '/juvenil/ambientes', img: '/img/gallery/juvenil-ambientes/juv-amb-1.jpg' },
+  { label: 'Camas Abatibles', href: '/juvenil/camas', img: '/img/gallery/juvenil-camas-abatibles/abat-amb-1.jpg' },
+  { label: 'Armarios', href: '/juvenil/armarios', img: '/img/gallery/juvenil-ambientes/juv-amb-10.jpg' },
+  { label: 'Escritorios', href: '/juvenil/escritorios', img: '/img/gallery/juvenil-ambientes/juv-amb-20.jpg' },
+  { label: 'Literas', href: '/juvenil/literas', img: '/img/gallery/juvenil-ambientes/juv-amb-30.jpg' },
+];
+---
+
+<Layout title="Juvenil | Muebles Fran Barcelona" description="Habitaciones juveniles, camas abatibles, literas y escritorios en Barcelona. Exposición en Muebles Fran, Gran Vía 1105.">
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-hero-tag">Muebles</span>
+      <h1>Juvenil</h1>
+    </div>
+  </div>
+
+  <section class="category-hub">
+    <div class="container">
+      <p class="category-hub-desc">
+        Habitaciones juveniles diseñadas para crecer. Camas abatibles que ganan espacio, literas seguras, escritorios funcionales y armarios coordinados.
+      </p>
+      <div class="category-grid">
+        {subcategorias.map(cat => (
+          <a href={cat.href} class="category-card">
+            <div class="category-card-img">
+              <img src={cat.img} alt={cat.label} loading="lazy" />
+            </div>
+            <div class="category-card-label">{cat.label}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>

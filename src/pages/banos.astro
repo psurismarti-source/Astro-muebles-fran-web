@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import GaleriaCategoria from '../components/GaleriaCategoria.astro';
+import { galerias } from '../data/galerias';
+
+const imagenes = galerias['banos'] ?? [];
+---
+
+<Layout
+  title="Baños | Muebles Fran Barcelona"
+  description="Muebles de baño y lavabos en Barcelona. Amplía selección de lavabos de apoyo, empotrados y sobre mueble en Muebles Fran, Gran Vía 1105."
+>
+  <GaleriaCategoria
+    titulo="Baños"
+    tag="Baños"
+    subtitulo="Muebles de baño con diseño y funcionalidad"
+    parrafos={[
+      'En Muebles Fran encontrarás una cuidada selección de lavabos y muebles de baño de las mejores marcas. Lavabos de apoyo, empotrados, sobre mueble y de pared en cerámica, cristal y piedra natural.',
+      'Diseños contemporáneos que combinan estética y durabilidad para que tu baño sea un espacio de bienestar y relajación.',
+    ]}
+    caracteristicas={[
+      'Lavabos de apoyo, empotrados y sobre mueble',
+      'Materiales: cerámica, cristal, piedra natural',
+      'Muebles de baño en múltiples acabados',
+      'Griferías y accesorios coordinados',
+      'Asesoramiento de proyecto incluido',
+    ]}
+    imagenPrincipal={`/img/gallery/banos/${imagenes[0] ?? ''}`}
+    imagenAlt="Baños en Muebles Fran Barcelona"
+    reverse={false}
+    galeriaFolder="banos"
+    imagenes={imagenes}
+    breadcrumb={[]}
+  />
+</Layout>

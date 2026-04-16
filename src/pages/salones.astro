@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const subcategorias = [
+  { label: 'Ambientes', href: '/salones/ambientes', img: '/img/gallery/salones-ambientes/sal-amb-1.jpg' },
+  { label: 'Sofás', href: '/salones/sofas', img: '/img/gallery/salones-sofas/pedro-ort-1.jpg' },
+  { label: 'Mesas', href: '/salones/mesas', img: '/img/gallery/salones-mesas/taul-aluja-1.jpg' },
+  { label: 'Sillas', href: '/salones/sillas', img: '/img/gallery/salones-sillas/funcion-1.jpg' },
+  { label: 'Butacas', href: '/salones/butacas', img: '/img/gallery/salones-butacas/but-1.jpg' },
+  { label: 'Aparadores', href: '/salones/buffets', img: '/img/gallery/salones-buffets/buf-amb-1.jpg' },
+  { label: 'Muebles TV', href: '/salones/muebles-tv', img: '/img/gallery/salones-muebles-tv/tv-natur_ant-1.jpg' },
+];
+---
+
+<Layout title="Salones | Muebles Fran Barcelona" description="Salones, sofás, mesas, sillas y muebles de comedor en Barcelona. Amplia exposición en Muebles Fran, Gran Vía 1105.">
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-hero-tag">Muebles</span>
+      <h1>Salones</h1>
+    </div>
+  </div>
+
+  <section class="category-hub">
+    <div class="container">
+      <p class="category-hub-desc">
+        Descubre nuestra amplia colección de muebles para el salón y el comedor. Sofás, mesas, sillas, butacas, aparadores y muebles de TV de las mejores marcas.
+      </p>
+      <div class="category-grid">
+        {subcategorias.map(cat => (
+          <a href={cat.href} class="category-card">
+            <div class="category-card-img">
+              <img src={cat.img} alt={cat.label} loading="lazy" />
+            </div>
+            <div class="category-card-label">{cat.label}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>

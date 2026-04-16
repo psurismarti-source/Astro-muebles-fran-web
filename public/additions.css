@@ -1,0 +1,185 @@
+/* ================================================================
+   additions.css — Estilos nuevos para la versión Astro
+   Añade este archivo al <head> del Layout DESPUÉS de style.css:
+   <link rel="stylesheet" href="/style.css" />
+   <link rel="stylesheet" href="/additions.css" />
+   ================================================================ */
+
+/* ── Category Hub (páginas de categoría con subcategorías) ─────── */
+
+.category-hub {
+  padding: 4rem 1.5rem;
+}
+
+.category-hub-desc {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 3rem;
+  color: #555;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.category-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  background: #fff;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,.13);
+}
+
+.category-card-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.category-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover .category-card-img img {
+  transform: scale(1.04);
+}
+
+.category-card-label {
+  padding: 1rem 1.25rem;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+/* ── Blog grid ─────────────────────────────────────────────────── */
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.blog-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  background: #fff;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,.13);
+}
+
+.blog-card-img {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.blog-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.blog-card:hover .blog-card-img img {
+  transform: scale(1.04);
+}
+
+.blog-card-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.blog-card-date {
+  display: block;
+  font-size: 0.8rem;
+  color: #999;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.blog-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.6rem;
+  line-height: 1.4;
+}
+
+.blog-card-excerpt {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card-cta {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: inherit;
+  opacity: 0.7;
+}
+
+/* ── Contenido artículo blog ───────────────────────────────────── */
+
+.blog-content h2 { font-size: 1.6rem; margin: 2rem 0 1rem; }
+.blog-content h3 { font-size: 1.25rem; margin: 1.75rem 0 0.75rem; }
+.blog-content p  { line-height: 1.8; margin-bottom: 1.25rem; }
+.blog-content blockquote {
+  border-left: 3px solid #ccc;
+  padding-left: 1.25rem;
+  color: #666;
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+.blog-content img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+/* ── Page hero date (para artículos de blog) ───────────────────── */
+
+.page-hero-date {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+}
+
+/* ── Responsive ────────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
+}

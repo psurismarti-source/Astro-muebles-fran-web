@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['juvenil-ambientes'] ?? [];
+---
+
+<Layout
+  title="Escritorios Juveniles | Muebles Fran Barcelona"
+  description="Escritorios y zonas de estudio diseñados para jóvenes. Con cajones, estanterías superiores, puertos USB y gestión de cables integrada."
+>
+  <GaleriaCategoria
+    titulo="Escritorios Juveniles"
+    tag="Juvenil · Escritorios"
+    subtitulo="El rincón de estudio perfecto"
+    parrafos={[
+      'Escritorios y zonas de estudio diseñados para jóvenes. Con cajones, estanterías superiores, puertos USB y gestión de cables integrada.',
+      'Modulares y ampliables a medida que crecen las necesidades del estudiante. Coordinados con el resto del dormitorio juvenil.',
+    ]}
+    caracteristicas={[
+      'Con cajones y almacenaje integrado',
+      'Estanterías superiores modulares',
+      'Gestión de cables integrada',
+      'Altura ergonómica regulable en algunos modelos',
+      'Coordinados con camas y armarios',
+    ]}
+    imagenPrincipal={`/img/gallery/juvenil-ambientes/${imagenes[0] ?? ''}` }
+    imagenAlt="Escritorios Juveniles en Muebles Fran Barcelona"
+    reverse={true}
+    galeriaFolder="juvenil-ambientes"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Juvenil', href: '/juvenil' },
+    ]}
+  />
+</Layout>

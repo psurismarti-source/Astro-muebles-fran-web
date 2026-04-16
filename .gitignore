@@ -1,0 +1,25 @@
+# Dependencias
+node_modules/
+sanity/node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Variables de entorno (nunca subir al repo)
+.env
+.env.local
+.env.production
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor
+.vscode/
+.idea/

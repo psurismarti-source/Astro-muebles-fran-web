@@ -1,0 +1,133 @@
+---
+/**
+ * GaleriaCategoria.astro
+ * Componente reutilizable para todas las páginas de categoría de productos.
+ * Genera: breadcrumb + hero + sección split (imagen/texto) + galería con lightbox.
+ */
+
+export interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
+export interface Props {
+  /** Título principal de la página (h1) */
+  titulo: string;
+  /** Tag pequeño sobre el h1, ej: "Dormitorios · Armarios" */
+  tag: string;
+  /** Subtítulo de la sección split */
+  subtitulo: string;
+  /** Párrafos descriptivos */
+  parrafos: string[];
+  /** Lista de características (puntos verdes) */
+  caracteristicas: string[];
+  /** Texto del botón de presupuesto */
+  ctaTexto?: string;
+  /** URL del botón de presupuesto */
+  ctaUrl?: string;
+  /** Imagen principal del split (izquierda/derecha) */
+  imagenPrincipal: string;
+  /** Alt de la imagen principal */
+  imagenAlt?: string;
+  /** Si true, el split tiene la imagen a la derecha */
+  reverse?: boolean;
+  /** Carpeta base de la galería, ej: "dormitorios-armarios" */
+  galeriaFolder: string;
+  /** Array de nombres de archivo de las imágenes */
+  imagenes: string[];
+  /** Título de la sección galería */
+  galeriaTitulo?: string;
+  /** Ruta del breadcrumb */
+  breadcrumb: BreadcrumbItem[];
+}
+
+const {
+  titulo,
+  tag,
+  subtitulo,
+  parrafos,
+  caracteristicas,
+  ctaTexto = 'Solicitar presupuesto →',
+  ctaUrl,
+  imagenPrincipal,
+  imagenAlt,
+  reverse = false,
+  galeriaFolder,
+  imagenes,
+  galeriaTitulo,
+  breadcrumb,
+} = Astro.props;
+
+const defaultCtaUrl = ctaUrl ?? `/presupuesto?producto=${encodeURIComponent(titulo)}&pagina=${galeriaFolder}`;
+const basePath = `/img/gallery/${galeriaFolder}/`;
+const gTitle = galeriaTitulo ?? `Galería — ${titulo}`;
+---
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="/">Inicio</a>
+    {breadcrumb.map(item => (
+      <>
+        <span>›</span>
+        <a href={item.href}>{item.label}</a>
+      </>
+    ))}
+    <span>›</span>
+    <strong>{titulo}</strong>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-hero-tag">{tag}</span>
+    <h1>{titulo}</h1>
+  </div>
+</div>
+
+<!-- SPLIT INTRO -->
+<div class={`gi-section${reverse ? ' reverse' : ''}`}>
+  <div class="gi-photo">
+    <img src={imagenPrincipal} alt={imagenAlt ?? titulo} />
+  </div>
+  <div class="gi-text">
+    <div class="gi-text-inner">
+      <span class="gi-tag">{tag}</span>
+      <h2>{subtitulo}</h2>
+      {parrafos.map(p => <p>{p}</p>)}
+      {caracteristicas.length > 0 && (
+        <ul class="gi-features">
+          {caracteristicas.map(c => <li>{c}</li>)}
+        </ul>
+      )}
+      <a href={defaultCtaUrl} class="gi-cta">{ctaTexto}</a>
+    </div>
+  </div>
+</div>
+
+<!-- GALERÍA -->
+<section class="gallery-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>{gTitle}</h2>
+      <p>Haz clic en cualquier imagen para verla a pantalla completa · {imagenes.length} fotografías</p>
+    </div>
+    <div class="gallery-grid">
+      {imagenes.map((img, i) => (
+        <a
+          class="gallery-item"
+          href={`${basePath}${img}`}
+          data-full={`${basePath}${img}`}
+          data-index={i}
+        >
+          <img
+            src={`${basePath}${img}`}
+            alt={`${titulo} - imagen ${i + 1}`}
+            loading="lazy"
+          />
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

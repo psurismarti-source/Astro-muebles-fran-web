@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import GaleriaCategoria from '../components/GaleriaCategoria.astro';
+import { galerias } from '../data/galerias';
+
+const imagenes = galerias['cocinas'] ?? [];
+---
+
+<Layout
+  title="Cocinas | Muebles Fran Barcelona"
+  description="Cocinas modernas y clásicas en Barcelona. Diseño y fabricación de cocinas a medida en Muebles Fran, Gran Vía 1105."
+>
+  <GaleriaCategoria
+    titulo="Cocinas"
+    tag="Cocinas"
+    subtitulo="Cocinas diseñadas para tu forma de vivir"
+    parrafos={[
+      'Diseñamos y fabricamos cocinas a medida adaptadas a cada espacio y cada necesidad. Desde cocinas minimalistas en lacado blanco hasta modelos en madera natural o con isla central.',
+      'Nuestros especialistas te acompañan desde el primer boceto hasta la instalación completa, con las mejores marcas de electrodomésticos.',
+    ]}
+    caracteristicas={[
+      'Diseño personalizado gratuito',
+      'Acabados: lacado, madera, piedra sinterizada',
+      'Con o sin isla central',
+      'Electrodomésticos de primeras marcas',
+      'Instalación completa en Barcelona',
+    ]}
+    imagenPrincipal={`/img/gallery/cocinas/${imagenes[0] ?? ''}`}
+    imagenAlt="Cocinas en Muebles Fran Barcelona"
+    reverse={true}
+    galeriaFolder="cocinas"
+    imagenes={imagenes}
+    breadcrumb={[]}
+  />
+</Layout>

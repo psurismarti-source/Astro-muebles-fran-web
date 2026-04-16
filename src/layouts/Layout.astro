@@ -1,0 +1,193 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'Muebles Fran Barcelona — Tienda de muebles y decoración en Gran Vía 1105. Salones, dormitorios, cocinas, baños y juvenil.',
+  ogImage = '/img/Logo-muebles-barcelona.jpg',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <title>{title}</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/additions.css" />
+  <link rel="icon" type="image/jpeg" href="/img/Logo-muebles-barcelona.jpg" />
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header>
+    <nav>
+      <a href="/">
+        <img class="logo-img" src="/img/Logo-muebles-barcelona.jpg" alt="Muebles Fran · Mobiliari Interiorisme" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="/nosotros">Nosotros</a></li>
+        <li>
+          <a href="#">Muebles <svg class="nav-arrow" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="2,3 5,7 8,3"/></svg></a>
+          <div class="nav-dropdown">
+            <a href="/salones">Salones</a>
+            <a href="/dormitorios">Dormitorios</a>
+            <a href="/juvenil">Juvenil</a>
+            <a href="/banos">Baños</a>
+            <a href="/cocinas">Cocinas</a>
+          </div>
+        </li>
+        <li><a href="/#blog">Blog</a></li>
+        <li><a href="/#contacto" class="nav-cta">Cómo llegar</a></li>
+      </ul>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="/">Inicio</a>
+      <a href="/nosotros">Nosotros</a>
+      <span class="mobile-section-title">Muebles</span>
+      <a href="/salones" style="padding-left:36px;">— Salones</a>
+      <a href="/dormitorios" style="padding-left:36px;">— Dormitorios</a>
+      <a href="/juvenil" style="padding-left:36px;">— Juvenil</a>
+      <a href="/banos" style="padding-left:36px;">— Baños</a>
+      <a href="/cocinas" style="padding-left:36px;">— Cocinas</a>
+      <a href="/#blog">Blog</a>
+      <a href="/#contacto" class="nav-cta">Cómo llegar</a>
+    </div>
+  </header>
+
+  <!-- ===== CONTENIDO DE LA PÁGINA ===== -->
+  <slot />
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <img class="footer-logo-img" src="/img/Logo-muebles-barcelona.jpg" alt="Muebles Fran · Mobiliari Interiorisme" />
+          <div class="footer-tagline">Mobiliari Interiorisme · Barcelona</div>
+        </div>
+        <div class="footer-links">
+          <h4>Muebles</h4>
+          <ul>
+            <li><a href="/salones">Salones</a></li>
+            <li><a href="/dormitorios">Dormitorios</a></li>
+            <li><a href="/juvenil">Juvenil</a></li>
+            <li><a href="/banos">Baños</a></li>
+            <li><a href="/cocinas">Cocinas</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="tel:+34933138806">93 313 88 06</a></li>
+            <li><a href="https://wa.me/34644484563" target="_blank" rel="noopener">644 48 45 63 (WhatsApp)</a></li>
+            <li><a href="mailto:comercial@mfran.com">comercial@mfran.com</a></li>
+            <li><span>Gran Vía de les Corts Catalanes 1105, 08020 Barcelona</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Muebles Fran · Barcelona · Todos los derechos reservados</div>
+    </div>
+  </footer>
+
+  <!-- ===== LIGHTBOX ===== -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de imágenes">
+    <button id="lbClose" class="lb-close" aria-label="Cerrar">✕</button>
+    <button id="lbPrev" class="lb-prev" aria-label="Anterior">‹</button>
+    <button id="lbNext" class="lb-next" aria-label="Siguiente">›</button>
+    <div id="lbLoading" class="lb-loading" style="display:none">Cargando…</div>
+    <img id="lbImg" src="" alt="Imagen ampliada" class="lb-img" />
+    <div id="lbCounter" class="lb-counter"></div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Hamburger menu
+    var hBtn = document.getElementById('hamburgerBtn');
+    var mMenu = document.getElementById('mobileMenu');
+    if (hBtn) {
+      hBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var open = mMenu!.classList.toggle('open');
+        hBtn!.setAttribute('aria-expanded', String(open));
+      });
+      mMenu!.querySelectorAll('a').forEach(function(l) {
+        l.addEventListener('click', function() {
+          mMenu!.classList.remove('open');
+          hBtn!.setAttribute('aria-expanded', 'false');
+        });
+      });
+      window.addEventListener('scroll', function() {
+        mMenu!.classList.remove('open');
+        hBtn!.setAttribute('aria-expanded', 'false');
+      }, { passive: true });
+    }
+
+    // Lightbox
+    (function() {
+      var lb = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lbImg') as HTMLImageElement;
+      var lbCounter = document.getElementById('lbCounter');
+      var lbLoading = document.getElementById('lbLoading');
+      var items = Array.from(document.querySelectorAll('.gallery-item'));
+      var current = 0;
+
+      function openLb(idx: number) {
+        current = idx;
+        var item = items[idx] as HTMLAnchorElement;
+        var src = item.dataset.full || (item.querySelector('img') as HTMLImageElement)?.src || '';
+        lbLoading!.style.display = 'block';
+        lbImg!.style.opacity = '0';
+        lb!.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        lbCounter!.textContent = (idx + 1) + ' / ' + items.length;
+        var tmp = new Image();
+        tmp.onload = function() {
+          lbImg!.src = src;
+          lbImg!.style.opacity = '1';
+          lbLoading!.style.display = 'none';
+        };
+        tmp.src = src;
+      }
+
+      function closeLb() {
+        lb!.classList.remove('open');
+        document.body.style.overflow = '';
+        lbImg!.src = '';
+      }
+
+      function prev() { openLb((current - 1 + items.length) % items.length); }
+      function next() { openLb((current + 1) % items.length); }
+
+      items.forEach(function(item, i) {
+        item.addEventListener('click', function(e) { e.preventDefault(); openLb(i); });
+      });
+
+      document.getElementById('lbClose')?.addEventListener('click', closeLb);
+      document.getElementById('lbPrev')?.addEventListener('click', prev);
+      document.getElementById('lbNext')?.addEventListener('click', next);
+      lb?.addEventListener('click', function(e) { if (e.target === lb) closeLb(); });
+      document.addEventListener('keydown', function(e) {
+        if (!lb!.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLb();
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      });
+    })();
+  </script>
+  <script is:inline src="/wa-btn.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['salones-sillas'] ?? [];
+---
+
+<Layout
+  title="Sillas de Comedor | Muebles Fran Barcelona"
+  description="Gran variedad de sillas de comedor tapizadas en tela, polipiel y madera. Clásicas, modernas y nórdicas para combinar con cualquier mesa."
+>
+  <GaleriaCategoria
+    titulo="Sillas de Comedor"
+    tag="Salones · Sillas"
+    subtitulo="Sillas tapizadas y de madera para el comedor"
+    parrafos={[
+      'Gran variedad de sillas de comedor tapizadas en tela, polipiel y madera. Clásicas, modernas y nórdicas para combinar con cualquier mesa.',
+      'También encontrarás sillas apilables, con reposabrazos y taburetes altos para barra o isla de cocina.',
+    ]}
+    caracteristicas={[
+      'Más de 80 modelos en exposición',
+      'Tapizadas en tela, polipiel y madera',
+      'Varios colores y acabados disponibles',
+      'Sillas con y sin reposabrazos',
+      'Taburetes y sillas altas para barra',
+    ]}
+    imagenPrincipal={`/img/gallery/salones-sillas/${imagenes[0] ?? ''}` }
+    imagenAlt="Sillas de Comedor en Muebles Fran Barcelona"
+    reverse={true}
+    galeriaFolder="salones-sillas"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Salones', href: '/salones' },
+    ]}
+  />
+</Layout>

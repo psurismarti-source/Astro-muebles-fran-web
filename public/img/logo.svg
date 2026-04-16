@@ -1,0 +1,21 @@
+<svg viewBox="0 0 210 72" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cuadrado superior izquierdo: f -->
+  <rect x="0" y="0" width="33" height="33" fill="#0a0a0a"/>
+  <!-- Cuadrado superior derecho: r -->
+  <rect x="36" y="0" width="33" height="33" fill="#0a0a0a"/>
+  <!-- Cuadrado inferior izquierdo: a -->
+  <rect x="0" y="36" width="33" height="33" fill="#0a0a0a"/>
+  <!-- Cuadrado inferior derecho: n -->
+  <rect x="36" y="36" width="33" height="33" fill="#0a0a0a"/>
+
+  <!-- Letras en blanco -->
+  <text x="16.5" y="25" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">f</text>
+  <text x="52.5" y="25" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">r</text>
+  <text x="16.5" y="61" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">a</text>
+  <text x="52.5" y="61" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">n</text>
+
+  <!-- Texto "Mobiliari" -->
+  <text x="82" y="32" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#0a0a0a" letter-spacing="0.5">Mobiliari</text>
+  <!-- Texto "Interiorisme" -->
+  <text x="82" y="52" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#0a0a0a" letter-spacing="0.3">Interiorisme</text>
+</svg>

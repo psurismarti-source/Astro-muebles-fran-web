@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['dormitorios-ambientes'] ?? [];
+---
+
+<Layout
+  title="Ambientes de Dormitorio | Muebles Fran Barcelona"
+  description="Más de 90 ambientes de dormitorio en nuestra exposición de Barcelona. Desde habitaciones matrimoniales hasta dormitorios juveniles, cada composición e"
+>
+  <GaleriaCategoria
+    titulo="Ambientes de Dormitorio"
+    tag="Dormitorios · Ambientes"
+    subtitulo="Composiciones completas para tu dormitorio"
+    parrafos={[
+      'Más de 90 ambientes de dormitorio en nuestra exposición de Barcelona. Desde habitaciones matrimoniales hasta dormitorios juveniles, cada composición está pensada para maximizar el espacio.',
+      'Combinamos camas, armarios, mesitas, cómodas y cabeceros para crear dormitorios con personalidad y funcionalidad.',
+    ]}
+    caracteristicas={[
+      'Más de 90 ambientes en exposición',
+      'Camas de 135, 150 y 180 cm',
+      'Armarios y sistemas de almacenaje',
+      'Diferentes estilos y acabados',
+      'Diseño e instalación profesional',
+    ]}
+    imagenPrincipal={`/img/gallery/dormitorios-ambientes/${imagenes[0] ?? ''}` }
+    imagenAlt="Ambientes de Dormitorio en Muebles Fran Barcelona"
+    reverse={false}
+    galeriaFolder="dormitorios-ambientes"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Dormitorios', href: '/dormitorios' },
+    ]}
+  />
+</Layout>

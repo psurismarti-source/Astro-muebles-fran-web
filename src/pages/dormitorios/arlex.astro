@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['dormitorios-ambientes'] ?? [];
+---
+
+<Layout
+  title="Dormitorios Arlex | Muebles Fran Barcelona"
+  description="Arlex es una de las marcas de referencia en dormitorios de diseño. Sus composiciones combinan materiales de alta calidad con un diseño contemporáneo y"
+>
+  <GaleriaCategoria
+    titulo="Dormitorios Arlex"
+    tag="Dormitorios · Arlex"
+    subtitulo="La colección premium de Arlex"
+    parrafos={[
+      'Arlex es una de las marcas de referencia en dormitorios de diseño. Sus composiciones combinan materiales de alta calidad con un diseño contemporáneo y atemporal.',
+      'En Muebles Fran somos distribuidores oficiales de Arlex. Visita nuestra exposición en Barcelona para descubrir la colección completa.',
+    ]}
+    caracteristicas={[
+      'Distribuidores oficiales Arlex en Barcelona',
+      'Materiales de primera calidad',
+      'Diseño contemporáneo y atemporal',
+      'Camas, armarios y complementos de la marca',
+      'Garantía de fabricante',
+    ]}
+    imagenPrincipal={`/img/gallery/dormitorios-ambientes/${imagenes[0] ?? ''}` }
+    imagenAlt="Dormitorios Arlex en Muebles Fran Barcelona"
+    reverse={false}
+    galeriaFolder="dormitorios-ambientes"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Dormitorios', href: '/dormitorios' },
+    ]}
+  />
+</Layout>

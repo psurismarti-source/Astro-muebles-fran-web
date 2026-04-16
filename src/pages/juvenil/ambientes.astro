@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['juvenil-ambientes'] ?? [];
+---
+
+<Layout
+  title="Ambientes Juveniles | Muebles Fran Barcelona"
+  description="Habitaciones juveniles que crecen con tus hijos. Composiciones funcionales con escritorios, estanterías, armarios y camas en un solo conjunto."
+>
+  <GaleriaCategoria
+    titulo="Ambientes Juveniles"
+    tag="Juvenil · Ambientes"
+    subtitulo="Habitaciones juveniles con personalidad"
+    parrafos={[
+      'Habitaciones juveniles que crecen con tus hijos. Composiciones funcionales con escritorios, estanterías, armarios y camas en un solo conjunto.',
+      'Diseños modernos y coloridos que se adaptan a todos los gustos, con gran variedad de acabados y configuraciones.',
+    ]}
+    caracteristicas={[
+      'Más de 100 ambientes en exposición',
+      'Composiciones con escritorio integrado',
+      'Camas nido, abatibles y literas',
+      'Armarios y sistemas de almacenaje',
+      'Acabados en múltiples colores',
+    ]}
+    imagenPrincipal={`/img/gallery/juvenil-ambientes/${imagenes[0] ?? ''}` }
+    imagenAlt="Ambientes Juveniles en Muebles Fran Barcelona"
+    reverse={false}
+    galeriaFolder="juvenil-ambientes"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Juvenil', href: '/juvenil' },
+    ]}
+  />
+</Layout>

@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['juvenil-ambientes'] ?? [];
+---
+
+<Layout
+  title="Literas | Muebles Fran Barcelona"
+  description="Literas para habitaciones compartidas. Estructura robusta con escalera de acceso segura, barandilla de protección y diseño moderno."
+>
+  <GaleriaCategoria
+    titulo="Literas"
+    tag="Juvenil · Literas"
+    subtitulo="Literas seguras y con estilo"
+    parrafos={[
+      'Literas para habitaciones compartidas. Estructura robusta con escalera de acceso segura, barandilla de protección y diseño moderno.',
+      'Modelos con escritorio integrado en la cama inferior, con cama nido extraíble y triples para hasta tres camas en el mismo espacio.',
+    ]}
+    caracteristicas={[
+      'Estructura robusta certificada',
+      'Barandilla de seguridad incluida',
+      'Escalera cómoda con peldaños antideslizantes',
+      'Modelos con escritorio y cajones',
+      'Para colchones de 90 y 105 cm',
+    ]}
+    imagenPrincipal={`/img/gallery/juvenil-ambientes/${imagenes[0] ?? ''}` }
+    imagenAlt="Literas en Muebles Fran Barcelona"
+    reverse={false}
+    galeriaFolder="juvenil-ambientes"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Juvenil', href: '/juvenil' },
+    ]}
+  />
+</Layout>

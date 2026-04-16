@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['salones-ambientes'] ?? [];
+---
+
+<Layout
+  title="Ambientes de Salón | Muebles Fran Barcelona"
+  description="Descubre nuestra amplia selección de ambientes de salón, donde cada composición ha sido diseñada para maximizar el espacio y la estética de tu hogar."
+>
+  <GaleriaCategoria
+    titulo="Ambientes de Salón"
+    tag="Salones · Ambientes"
+    subtitulo="Composiciones completas para tu salón"
+    parrafos={[
+      'Descubre nuestra amplia selección de ambientes de salón, donde cada composición ha sido diseñada para maximizar el espacio y la estética de tu hogar.',
+      'Desde estilos contemporáneos hasta diseños más clásicos, en Muebles Fran encontrarás la solución perfecta para cada gusto y cada presupuesto.',
+    ]}
+    caracteristicas={[
+      'Más de 55 ambientes en exposición',
+      'Composiciones personalizables',
+      'Diferentes estilos: moderno, nórdico, clásico',
+      'Asesoramiento de decoración incluido',
+      'Montaje profesional en Barcelona',
+    ]}
+    imagenPrincipal={`/img/gallery/salones-ambientes/${imagenes[0] ?? ''}` }
+    imagenAlt="Ambientes de Salón en Muebles Fran Barcelona"
+    reverse={false}
+    galeriaFolder="salones-ambientes"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Salones', href: '/salones' },
+    ]}
+  />
+</Layout>

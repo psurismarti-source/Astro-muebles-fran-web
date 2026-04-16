@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['salones-sofas'] ?? [];
+---
+
+<Layout
+  title="Sofás | Muebles Fran Barcelona"
+  description="Amplia selección de sofás de las mejores marcas nacionales: rinconeras, cheslong, sofás cama y módulos componibles. Tapizados en tela, terciopelo o pi"
+>
+  <GaleriaCategoria
+    titulo="Sofás"
+    tag="Salones · Sofás"
+    subtitulo="Sofás para todos los estilos y espacios"
+    parrafos={[
+      'Amplia selección de sofás de las mejores marcas nacionales: rinconeras, cheslong, sofás cama y módulos componibles. Tapizados en tela, terciopelo o piel.',
+      'Personalizables en color, medida y tipo de pata. Consulta nuestro catálogo de más de 40 modelos en exposición.',
+    ]}
+    caracteristicas={[
+      'Más de 40 modelos en exposición',
+      'Sofás rinconera, cheslong y 3 plazas',
+      'Sofás cama con arrastre',
+      'Tapizados: tela, terciopelo, piel',
+      'Montaje e instalación en Barcelona',
+    ]}
+    imagenPrincipal={`/img/gallery/salones-sofas/${imagenes[0] ?? ''}` }
+    imagenAlt="Sofás en Muebles Fran Barcelona"
+    reverse={true}
+    galeriaFolder="salones-sofas"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Salones', href: '/salones' },
+    ]}
+  />
+</Layout>

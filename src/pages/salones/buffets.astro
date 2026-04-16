@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['salones-buffets'] ?? [];
+---
+
+<Layout
+  title="Aparadores y Buffets | Muebles Fran Barcelona"
+  description="Colección de aparadores y buffets en madera, lacado y combinados. Perfectos para almacenar vajilla, mantelería y complementos de comedor."
+>
+  <GaleriaCategoria
+    titulo="Aparadores y Buffets"
+    tag="Salones · Aparadores"
+    subtitulo="Orden y estética para tu comedor"
+    parrafos={[
+      'Colección de aparadores y buffets en madera, lacado y combinados. Perfectos para almacenar vajilla, mantelería y complementos de comedor.',
+      'Diseños bajos y altos, con puertas correderas o batientes, en distintos acabados para coordinarse con tu mesa y sillas.',
+    ]}
+    caracteristicas={[
+      'Más de 33 modelos en exposición',
+      'Acabados: madera, lacado, combinado',
+      'Con baldas regulables interiores',
+      'Puertas correderas y batientes',
+      'Medidas estándar y a medida',
+    ]}
+    imagenPrincipal={`/img/gallery/salones-buffets/${imagenes[0] ?? ''}` }
+    imagenAlt="Aparadores y Buffets en Muebles Fran Barcelona"
+    reverse={true}
+    galeriaFolder="salones-buffets"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Salones', href: '/salones' },
+    ]}
+  />
+</Layout>

@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['salones-butacas'] ?? [];
+---
+
+<Layout
+  title="Butacas y Sillones | Muebles Fran Barcelona"
+  description="Selección de butacas y sillones individuales para completar tu salón. Modelos relax con mecanismo reclinable, butacas de diseño y sillones orejeros."
+>
+  <GaleriaCategoria
+    titulo="Butacas y Sillones"
+    tag="Salones · Butacas"
+    subtitulo="El rincón de descanso perfecto"
+    parrafos={[
+      'Selección de butacas y sillones individuales para completar tu salón. Modelos relax con mecanismo reclinable, butacas de diseño y sillones orejeros.',
+      'Disponibles en multitud de tapizados y acabados, combinables con el sofá de tu elección.',
+    ]}
+    caracteristicas={[
+      'Modelos relax con reclinable',
+      'Butacas de diseño y orejeras',
+      'Tapizados: tela, terciopelo, piel',
+      'Opciones con reposapiés',
+      'Combinables con sofás del catálogo',
+    ]}
+    imagenPrincipal={`/img/gallery/salones-butacas/${imagenes[0] ?? ''}` }
+    imagenAlt="Butacas y Sillones en Muebles Fran Barcelona"
+    reverse={false}
+    galeriaFolder="salones-butacas"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Salones', href: '/salones' },
+    ]}
+  />
+</Layout>

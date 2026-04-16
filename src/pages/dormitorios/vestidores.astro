@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GaleriaCategoria from '../../components/GaleriaCategoria.astro';
+import { galerias } from '../../data/galerias';
+
+const imagenes = galerias['dormitorio-vestidores'] ?? [];
+---
+
+<Layout
+  title="Vestidores | Muebles Fran Barcelona"
+  description="Transforma un dormitorio o un rincón en un vestidor funcional y elegante. Sistemas modulares adaptables a cualquier espacio y presupuesto."
+>
+  <GaleriaCategoria
+    titulo="Vestidores"
+    tag="Dormitorios · Vestidores"
+    subtitulo="Tu espacio personal de moda y organización"
+    parrafos={[
+      'Transforma un dormitorio o un rincón en un vestidor funcional y elegante. Sistemas modulares adaptables a cualquier espacio y presupuesto.',
+      'Diseñamos vestidores abiertos, con cortina o con puerta, con todo tipo de interiores: colgadores, baldas, cajones y zapateros.',
+    ]}
+    caracteristicas={[
+      'Más de 12 ambientes en exposición',
+      'Vestidores abiertos y cerrados',
+      'Sistemas modulares ampliables',
+      'Interiores personalizados',
+      'Iluminación integrada disponible',
+    ]}
+    imagenPrincipal={`/img/gallery/dormitorio-vestidores/${imagenes[0] ?? ''}` }
+    imagenAlt="Vestidores en Muebles Fran Barcelona"
+    reverse={true}
+    galeriaFolder="dormitorio-vestidores"
+    imagenes={imagenes}
+    breadcrumb={[
+      { label: 'Dormitorios', href: '/dormitorios' },
+    ]}
+  />
+</Layout>
