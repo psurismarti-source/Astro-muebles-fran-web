@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { sanityClient, QUERY_PAGINA_INICIO } from '../lib/sanityClient';
+import { sanityClient, QUERY_PAGINA_INICIO, ds } from '../lib/sanityClient';
 
 const data = await sanityClient.fetch(QUERY_PAGINA_INICIO).catch(() => null);
 
@@ -27,8 +27,8 @@ const docId = data?._id ?? 'pagina-inicio-singleton';
       <div class="hero-inner">
         <div class="hero-text">
           <span class="hero-tag">📍 Barcelona</span>
-          <h1 class="hero-title" data-sanity={`${docId};heroTitulo`}>{heroTitulo}</h1>
-          <p class="hero-desc" data-sanity={`${docId};heroSubtitulo`}>{heroSubtitulo}</p>
+          <h1 class="hero-title" data-sanity={ds(docId, 'paginaInicio', 'heroTitulo')}>{heroTitulo}</h1>
+          <p class="hero-desc" data-sanity={ds(docId, 'paginaInicio', 'heroSubtitulo')}>{heroSubtitulo}</p>
           <div class="hero-btns">
             <a href="#contacto" class="btn-primary-hero">
               📍 Cómo llegar
@@ -94,8 +94,8 @@ const docId = data?._id ?? 'pagina-inicio-singleton';
   <section id="productos">
     <div class="container">
       <div class="productos-header">
-        <h2 class="section-title" data-sanity={`${docId};productosTitulo`}>{productosTitulo}</h2>
-        <p class="section-subtitle" data-sanity={`${docId};productosSubtitulo`}>{productosSubtitulo}</p>
+        <h2 class="section-title" data-sanity={ds(docId, 'paginaInicio', 'productosTitulo')}>{productosTitulo}</h2>
+        <p class="section-subtitle" data-sanity={ds(docId, 'paginaInicio', 'productosSubtitulo')}>{productosSubtitulo}</p>
       </div>
       <div class="productos-grid">
         <a href="/salones" class="producto-card">
@@ -159,8 +159,8 @@ const docId = data?._id ?? 'pagina-inicio-singleton';
   <section id="ventajas">
     <div class="container">
       <div class="ventajas-header">
-        <h2 class="section-title" data-sanity={`${docId};ventajasTitulo`}>{ventajasTitulo}</h2>
-        <p class="section-subtitle" data-sanity={`${docId};ventajasSubtitulo`}>{ventajasSubtitulo}</p>
+        <h2 class="section-title" data-sanity={ds(docId, 'paginaInicio', 'ventajasTitulo')}>{ventajasTitulo}</h2>
+        <p class="section-subtitle" data-sanity={ds(docId, 'paginaInicio', 'ventajasSubtitulo')}>{ventajasSubtitulo}</p>
       </div>
       <div class="ventajas-grid">
         <div class="ventaja">
@@ -299,8 +299,8 @@ const docId = data?._id ?? 'pagina-inicio-singleton';
     <div class="container">
       <div class="blog-header">
         <div>
-          <h2 class="section-title" data-sanity={`${docId};blogTitulo`}>{blogTitulo}</h2>
-          <p class="section-subtitle" data-sanity={`${docId};blogSubtitulo`}>{blogSubtitulo}</p>
+          <h2 class="section-title" data-sanity={ds(docId, 'paginaInicio', 'blogTitulo')}>{blogTitulo}</h2>
+          <p class="section-subtitle" data-sanity={ds(docId, 'paginaInicio', 'blogSubtitulo')}>{blogSubtitulo}</p>
         </div>
       </div>
       <div class="blog-grid">

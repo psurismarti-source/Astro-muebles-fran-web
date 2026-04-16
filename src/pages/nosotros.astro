@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { sanityClient, QUERY_PAGINA_NOSOTROS } from '../lib/sanityClient';
+import { sanityClient, QUERY_PAGINA_NOSOTROS, ds } from '../lib/sanityClient';
 
 const data = await sanityClient.fetch(QUERY_PAGINA_NOSOTROS).catch(() => null);
 
@@ -37,9 +37,9 @@ const docId = data?._id ?? 'pagina-nosotros-singleton';
   <!-- ===== HERO ===== -->
   <section class="nos-hero">
     <div class="container">
-      <span class="nos-hero-tag" data-sanity={`${docId};heroTag`}>{heroTag}</span>
-      <h1 data-sanity={`${docId};heroTitulo`}>{heroTitulo}</h1>
-      <p data-sanity={`${docId};heroSubtitulo`}>{heroSubtitulo}</p>
+      <span class="nos-hero-tag" data-sanity={ds(docId, 'paginaNosotros', 'heroTag')}>{heroTag}</span>
+      <h1 data-sanity={ds(docId, 'paginaNosotros', 'heroTitulo')}>{heroTitulo}</h1>
+      <p data-sanity={ds(docId, 'paginaNosotros', 'heroSubtitulo')}>{heroSubtitulo}</p>
     </div>
   </section>
 
@@ -49,10 +49,10 @@ const docId = data?._id ?? 'pagina-nosotros-singleton';
       <img src="/img/gallery/salones-ambientes/sal-amb-12.jpg" alt="Ambiente de salón en exposición" loading="lazy"/>
     </div>
     <div class="nos-split-text">
-      <span class="gi-tag" data-sanity={`${docId};historiaTag`}>{historiaTag}</span>
-      <h2 data-sanity={`${docId};historiaTitulo`} set:html={historiaTitulo.replace(',', ',<br>')}></h2>
-      <p data-sanity={`${docId};historiaParrafo1`}>{historiaP1}</p>
-      <p data-sanity={`${docId};historiaParrafo2`}>{historiaP2}</p>
+      <span class="gi-tag" data-sanity={ds(docId, 'paginaNosotros', 'historiaTag')}>{historiaTag}</span>
+      <h2 data-sanity={ds(docId, 'paginaNosotros', 'historiaTitulo')} set:html={historiaTitulo.replace(',', ',<br>')}></h2>
+      <p data-sanity={ds(docId, 'paginaNosotros', 'historiaParrafo1')}>{historiaP1}</p>
+      <p data-sanity={ds(docId, 'paginaNosotros', 'historiaParrafo2')}>{historiaP2}</p>
       <a href="/#contacto" class="btn-primary" style="margin-top: 8px; display: inline-block; width: fit-content;">📍 Visítanos en tienda</a>
     </div>
   </section>
@@ -60,10 +60,10 @@ const docId = data?._id ?? 'pagina-nosotros-singleton';
   <!-- ===== SEGUNDA SPLIT (reversed) ===== -->
   <section class="nos-split">
     <div class="nos-split-text" style="background: var(--gris-claro);">
-      <span class="gi-tag" data-sanity={`${docId};compromisoTag`}>{compromisoTag}</span>
-      <h2 data-sanity={`${docId};compromisoTitulo`}>{compromisoTitulo}</h2>
-      <p data-sanity={`${docId};compromisoParrafo1`}>{compromisoP1}</p>
-      <p data-sanity={`${docId};compromisoParrafo2`}>{compromisoP2}</p>
+      <span class="gi-tag" data-sanity={ds(docId, 'paginaNosotros', 'compromisoTag')}>{compromisoTag}</span>
+      <h2 data-sanity={ds(docId, 'paginaNosotros', 'compromisoTitulo')}>{compromisoTitulo}</h2>
+      <p data-sanity={ds(docId, 'paginaNosotros', 'compromisoParrafo1')}>{compromisoP1}</p>
+      <p data-sanity={ds(docId, 'paginaNosotros', 'compromisoParrafo2')}>{compromisoP2}</p>
     </div>
     <div class="nos-split-img">
       <img src="/img/gallery/dormitorios-ambientes/0006-Arlex-003.jpg" alt="Ambiente de dormitorio en exposición" loading="lazy" style="filter: brightness(0.92);"/>
@@ -226,8 +226,8 @@ const docId = data?._id ?? 'pagina-nosotros-singleton';
   <!-- ===== CTA ===== -->
   <section class="nos-cta">
     <div class="container">
-      <h2 data-sanity={`${docId};ctaTitulo`}>{ctaTitulo}</h2>
-      <p data-sanity={`${docId};ctaSubtitulo`}>{ctaSubtitulo}</p>
+      <h2 data-sanity={ds(docId, 'paginaNosotros', 'ctaTitulo')}>{ctaTitulo}</h2>
+      <p data-sanity={ds(docId, 'paginaNosotros', 'ctaSubtitulo')}>{ctaSubtitulo}</p>
       <div class="nos-cta-btns">
         <a href="/#contacto" class="btn-primary">📍 Cómo llegar</a>
         <a href="https://wa.me/34644484563?text=%C2%A1Hola!%20He%20visitado%20vuestra%20web%20y%20me%20gustar%C3%ADa%20obtener%20informaci%C3%B3n%20sin%20compromiso." target="_blank" rel="noopener" class="btn-outline">💬 WhatsApp</a>

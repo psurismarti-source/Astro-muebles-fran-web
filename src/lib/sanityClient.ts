@@ -1,4 +1,5 @@
 import { createClient } from '@sanity/client';
+import { createDataAttribute } from '@sanity/visual-editing/create-data-attribute';
 
 export const sanityClient = createClient({
   projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID ?? '0g6vki0n',
@@ -8,8 +9,16 @@ export const sanityClient = createClient({
 });
 
 // ─── HELPER: atributo data-sanity para edición visual ─────────────────────────
-export function ds(documentId: string, path: string) {
-  return `${documentId};${path}`;
+export function ds(id: string | undefined, type: string, path: string): string | undefined {
+  if (!id) return undefined;
+  return createDataAttribute({
+    baseUrl: 'https://mueblesfran.sanity.studio',
+    projectId: '0g6vki0n',
+    dataset: 'production',
+    id,
+    type,
+    path,
+  }).toString();
 }
 
 // ─── QUERIES ──────────────────────────────────────────────────────────────────
