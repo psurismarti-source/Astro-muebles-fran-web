@@ -1,5 +1,6 @@
 ---
 import VisualEditing from '../components/VisualEditing'
+import { sanityClient, QUERY_CONFIG } from '../lib/sanityClient'
 
 export interface Props {
   title: string;
@@ -12,6 +13,12 @@ const {
   description = 'Muebles Fran Barcelona — Tienda de muebles y decoración en Gran Vía 1105. Salones, dormitorios, cocinas, baños y juvenil.',
   ogImage = '/img/Logo-muebles-barcelona.jpg',
 } = Astro.props;
+
+const config = await sanityClient.fetch(QUERY_CONFIG).catch(() => null);
+const telefono     = config?.telefono  ?? '93 313 88 06';
+const whatsapp     = config?.whatsapp  ?? '644 48 45 63';
+const email        = config?.email     ?? 'comercial@mfran.com';
+const direccion    = config?.direccion ?? 'Gran Vía de les Corts Catalanes 1105, 08020 Barcelona';
 ---
 
 <!DOCTYPE html>
@@ -93,10 +100,10 @@ const {
         <div class="footer-links">
           <h4>Contacto</h4>
           <ul>
-            <li><a href="tel:+34933138806">93 313 88 06</a></li>
-            <li><a href="https://wa.me/34644484563" target="_blank" rel="noopener">644 48 45 63 (WhatsApp)</a></li>
-            <li><a href="mailto:comercial@mfran.com">comercial@mfran.com</a></li>
-            <li><span>Gran Vía de les Corts Catalanes 1105, 08020 Barcelona</span></li>
+            <li><a href={`tel:+34${telefono.replace(/\s/g,'')}`}>{telefono}</a></li>
+            <li><a href={`https://wa.me/34${whatsapp.replace(/\s/g,'')}`} target="_blank" rel="noopener">{whatsapp} (WhatsApp)</a></li>
+            <li><a href={`mailto:${email}`}>{email}</a></li>
+            <li><span>{direccion}</span></li>
           </ul>
         </div>
       </div>
