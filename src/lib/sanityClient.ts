@@ -5,7 +5,7 @@ export const sanityClient = createClient({
   projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID ?? '0g6vki0n',
   dataset: import.meta.env.PUBLIC_SANITY_DATASET ?? 'production',
   apiVersion: import.meta.env.PUBLIC_SANITY_API_VERSION ?? '2024-01-01',
-  useCdn: true,
+  useCdn: false,
 });
 
 // ─── HELPER: atributo data-sanity para edición visual ─────────────────────────
@@ -76,7 +76,7 @@ export const QUERY_PAGINA_CATEGORIA = `
   *[_type == "paginaCategoria" && slug.current == $slug][0] {
     _id, titulo, tag, subtitulo, caracteristicas, metaDescripcion,
     "parrafos": descripcion[_type == "block"][]{
-      "texto": string::join(children[].text, "")
+      "texto": pt::text(@)
     },
     imagenPrincipal { asset->{ url }, alt },
     galeriaExtra[] { asset->{ url }, alt }
