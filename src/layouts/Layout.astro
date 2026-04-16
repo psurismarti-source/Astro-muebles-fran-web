@@ -188,13 +188,6 @@ const {
     })();
   </script>
   <script is:inline src="/wa-btn.js"></script>
-  <!-- Sanity Visual Editing overlay (solo activo desde el iframe del Studio) -->
-  <script>
-    import { enableVisualEditing } from '@sanity/visual-editing';
-    if (window.self !== window.top) {
-      enableVisualEditing();
-    }
-  </script>
 
 </body>
 </html>
