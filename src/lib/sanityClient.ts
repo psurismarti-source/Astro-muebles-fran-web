@@ -31,7 +31,9 @@ export const QUERY_PAGINA_INICIO = `
     productosTitulo, productosSubtitulo,
     ventajasTitulo, ventajasSubtitulo,
     ventajas[] { _key, icono, titulo, descripcion },
-    blogTitulo, blogSubtitulo
+    blogTitulo, blogSubtitulo,
+    parkingTitulo, parkingDescripcion, parkingCta,
+    contactoTitulo, contactoSubtitulo
   }
 `;
 

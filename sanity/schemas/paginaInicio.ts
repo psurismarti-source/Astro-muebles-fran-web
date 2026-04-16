@@ -103,6 +103,47 @@ export default defineType({
       initialValue: 'Consejos, tendencias e inspiración para tu hogar',
       group: 'blog',
     }),
+
+    // ── PARKING BANNER ────────────────────────────────────────────────
+    defineField({
+      name: 'parkingTitulo',
+      title: 'Parking — Título',
+      type: 'string',
+      initialValue: 'Parking gratuito para clientes',
+      group: 'parking',
+    }),
+    defineField({
+      name: 'parkingDescripcion',
+      title: 'Parking — Descripción',
+      type: 'text',
+      rows: 2,
+      initialValue: 'Ven en coche sin preocuparte por el aparcamiento — disponemos de parking propio y gratuito para todos nuestros clientes.',
+      group: 'parking',
+    }),
+    defineField({
+      name: 'parkingCta',
+      title: 'Parking — Texto del botón',
+      type: 'string',
+      initialValue: 'Ver ubicación →',
+      group: 'parking',
+    }),
+
+    // ── CONTACTO ──────────────────────────────────────────────────────
+    defineField({
+      name: 'contactoTitulo',
+      title: 'Contacto — Título sección',
+      type: 'string',
+      initialValue: 'Visítanos en tienda',
+      group: 'contacto',
+    }),
+    defineField({
+      name: 'contactoSubtitulo',
+      title: 'Contacto — Subtítulo',
+      type: 'text',
+      rows: 2,
+      initialValue: 'Estamos en Barcelona, listos para atenderte. Ven a conocer nuestra exposición y encuentra el mueble perfecto para tu hogar.',
+      group: 'contacto',
+    }),
   ],
 
   groups: [
@@ -110,5 +151,7 @@ export default defineType({
     { name: 'productos', title: '🛋️ Productos' },
     { name: 'ventajas', title: '⭐ Ventajas' },
     { name: 'blog', title: '📰 Blog' },
+    { name: 'parking', title: '🅿️ Parking' },
+    { name: 'contacto', title: '📍 Contacto' },
   ],
 })

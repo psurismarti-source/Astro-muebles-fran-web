@@ -26,6 +26,11 @@ const ventajasTitulo    = data?.ventajasTitulo    ?? 'Muebles Fran';
 const ventajasSubtitulo = data?.ventajasSubtitulo ?? 'Calidad, servicio y experiencia a tu disposición';
 const blogTitulo    = data?.blogTitulo    ?? 'Blog';
 const blogSubtitulo = data?.blogSubtitulo ?? 'Consejos, tendencias e inspiración para tu hogar';
+const parkingTitulo      = data?.parkingTitulo      ?? 'Parking gratuito para clientes';
+const parkingDescripcion = data?.parkingDescripcion ?? 'Ven en coche sin preocuparte por el aparcamiento — disponemos de parking propio y gratuito para todos nuestros clientes.';
+const parkingCta         = data?.parkingCta         ?? 'Ver ubicación →';
+const contactoTitulo    = data?.contactoTitulo    ?? 'Visítanos en tienda';
+const contactoSubtitulo = data?.contactoSubtitulo ?? 'Estamos en Barcelona, listos para atenderte. Ven a conocer nuestra exposición y encuentra el mueble perfecto para tu hogar.';
 const docId = data?._id ?? 'pagina-inicio-singleton';
 
 // Ventajas: usa Sanity si existen, si no los valores por defecto
@@ -205,10 +210,10 @@ const ventajas = data?.ventajas?.length > 0 ? data.ventajas : [
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 17V7h4a3 3 0 0 1 0 6H9" /></svg>
         </div>
         <div class="parking-banner-text">
-          <strong>Parking gratuito para clientes</strong>
-          <span>Ven en coche sin preocuparte por el aparcamiento — disponemos de parking propio y gratuito para todos nuestros clientes.</span>
+          <strong data-sanity={ds(docId, 'paginaInicio', 'parkingTitulo')}>{parkingTitulo}</strong>
+          <span data-sanity={ds(docId, 'paginaInicio', 'parkingDescripcion')}>{parkingDescripcion}</span>
         </div>
-        <a href="#contacto" class="parking-banner-cta">Ver ubicación →</a>
+        <a href="#contacto" class="parking-banner-cta" data-sanity={ds(docId, 'paginaInicio', 'parkingCta')}>{parkingCta}</a>
       </div>
     </div>
   </div>
@@ -218,8 +223,8 @@ const ventajas = data?.ventajas?.length > 0 ? data.ventajas : [
     <div class="container">
       <div class="contacto-inner">
         <div class="contacto-info">
-          <h2 class="section-title">Visítanos en tienda</h2>
-          <p>Estamos en Barcelona, listos para atenderte. Ven a conocer nuestra exposición y encuentra el mueble perfecto para tu hogar.</p>
+          <h2 class="section-title" data-sanity={ds(docId, 'paginaInicio', 'contactoTitulo')}>{contactoTitulo}</h2>
+          <p data-sanity={ds(docId, 'paginaInicio', 'contactoSubtitulo')}>{contactoSubtitulo}</p>
 
           <div class="contacto-dato">
             <div class="contacto-dato-icon">
