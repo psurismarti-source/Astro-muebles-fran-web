@@ -71,6 +71,18 @@ export const QUERY_NOTICIAS_RECIENTES = (n = 3) => `
   }
 `;
 
+/** Página de categoría por slug (= galeriaFolder) */
+export const QUERY_PAGINA_CATEGORIA = `
+  *[_type == "paginaCategoria" && slug.current == $slug][0] {
+    _id, titulo, tag, subtitulo, caracteristicas, metaDescripcion,
+    "parrafos": descripcion[_type == "block"][]{
+      "texto": string::join(children[].text, "")
+    },
+    imagenPrincipal { asset->{ url }, alt },
+    galeriaExtra[] { asset->{ url }, alt }
+  }
+`;
+
 /** Una noticia por slug */
 export const QUERY_NOTICIA_BY_SLUG = `
   *[_type == "noticia" && slug.current == $slug][0] {

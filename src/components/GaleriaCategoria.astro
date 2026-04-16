@@ -3,7 +3,10 @@
  * GaleriaCategoria.astro
  * Componente reutilizable para todas las páginas de categoría de productos.
  * Genera: breadcrumb + hero + sección split (imagen/texto) + galería con lightbox.
+ * Los textos se sobreescriben desde Sanity si existe un documento con el slug = galeriaFolder.
  */
+
+import { sanityClient, QUERY_PAGINA_CATEGORIA, ds } from '../lib/sanityClient';
 
 export interface BreadcrumbItem {
   label: string;
@@ -11,7 +14,7 @@ export interface BreadcrumbItem {
 }
 
 export interface Props {
-  /** Título principal de la página (h1) */
+  /** Título principal de la página (h1) — fallback si no hay Sanity */
   titulo: string;
   /** Tag pequeño sobre el h1, ej: "Dormitorios · Armarios" */
   tag: string;
@@ -31,7 +34,7 @@ export interface Props {
   imagenAlt?: string;
   /** Si true, el split tiene la imagen a la derecha */
   reverse?: boolean;
-  /** Carpeta base de la galería, ej: "dormitorios-armarios" */
+  /** Carpeta base de la galería, ej: "dormitorios-armarios" — también se usa como slug Sanity */
   galeriaFolder: string;
   /** Array de nombres de archivo de las imágenes */
   imagenes: string[];
@@ -42,14 +45,14 @@ export interface Props {
 }
 
 const {
-  titulo,
-  tag,
-  subtitulo,
-  parrafos,
-  caracteristicas,
+  titulo: tituloFallback,
+  tag: tagFallback,
+  subtitulo: subtituloFallback,
+  parrafos: parrafosFallback,
+  caracteristicas: caracteristicasFallback,
   ctaTexto = 'Solicitar presupuesto →',
   ctaUrl,
-  imagenPrincipal,
+  imagenPrincipal: imagenFallback,
   imagenAlt,
   reverse = false,
   galeriaFolder,
@@ -57,6 +60,26 @@ const {
   galeriaTitulo,
   breadcrumb,
 } = Astro.props;
+
+// ── Fetch Sanity (slug = galeriaFolder) ──────────────────────────────────────
+const sanity = await sanityClient
+  .fetch(QUERY_PAGINA_CATEGORIA, { slug: galeriaFolder })
+  .catch(() => null);
+
+// Merge: Sanity values override fallbacks when present
+const titulo          = sanity?.titulo    || tituloFallback;
+const tag             = sanity?.tag       || tagFallback;
+const subtitulo       = sanity?.subtitulo || subtituloFallback;
+const parrafos        = sanity?.parrafos?.length
+  ? sanity.parrafos.map((p: { texto: string }) => p.texto).filter(Boolean)
+  : parrafosFallback;
+const caracteristicas = sanity?.caracteristicas?.length
+  ? sanity.caracteristicas
+  : caracteristicasFallback;
+const imagenPrincipal = sanity?.imagenPrincipal?.asset?.url
+  ? sanity.imagenPrincipal.asset.url + '?w=900&auto=format'
+  : imagenFallback;
+const docId           = sanity?._id;
 
 const defaultCtaUrl = ctaUrl ?? `/presupuesto?producto=${encodeURIComponent(titulo)}&pagina=${galeriaFolder}`;
 const basePath = `/img/gallery/${galeriaFolder}/`;
@@ -81,23 +104,23 @@ const gTitle = galeriaTitulo ?? `Galería — ${titulo}`;
 <!-- PAGE HERO -->
 <div class="page-hero">
   <div class="page-hero-inner">
-    <span class="page-hero-tag">{tag}</span>
-    <h1>{titulo}</h1>
+    <span class="page-hero-tag" data-sanity={ds(docId, 'paginaCategoria', 'tag')}>{tag}</span>
+    <h1 data-sanity={ds(docId, 'paginaCategoria', 'titulo')}>{titulo}</h1>
   </div>
 </div>
 
 <!-- SPLIT INTRO -->
 <div class={`gi-section${reverse ? ' reverse' : ''}`}>
   <div class="gi-photo">
-    <img src={imagenPrincipal} alt={imagenAlt ?? titulo} />
+    <img src={imagenPrincipal} alt={imagenAlt ?? titulo} data-sanity={ds(docId, 'paginaCategoria', 'imagenPrincipal')} />
   </div>
   <div class="gi-text">
     <div class="gi-text-inner">
       <span class="gi-tag">{tag}</span>
-      <h2>{subtitulo}</h2>
-      {parrafos.map(p => <p>{p}</p>)}
+      <h2 data-sanity={ds(docId, 'paginaCategoria', 'subtitulo')}>{subtitulo}</h2>
+      {parrafos.map(p => <p data-sanity={ds(docId, 'paginaCategoria', 'descripcion')}>{p}</p>)}
       {caracteristicas.length > 0 && (
-        <ul class="gi-features">
+        <ul class="gi-features" data-sanity={ds(docId, 'paginaCategoria', 'caracteristicas')}>
           {caracteristicas.map(c => <li>{c}</li>)}
         </ul>
       )}
