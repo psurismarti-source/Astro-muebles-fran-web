@@ -1,4 +1,6 @@
 ---
+import VisualEditing from '../components/VisualEditing'
+
 export interface Props {
   title: string;
   description?: string;
@@ -188,6 +190,8 @@ const {
     })();
   </script>
   <script is:inline src="/wa-btn.js"></script>
+
+  <VisualEditing client:only="react" />
 
 </body>
 </html>
