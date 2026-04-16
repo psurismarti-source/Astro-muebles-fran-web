@@ -2,9 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { sanityClient, QUERY_NOTICIAS } from '../../lib/sanityClient';
 
-// Cuando hayas configurado Sanity, descomenta esta línea:
-// const noticias = await sanityClient.fetch(QUERY_NOTICIAS);
-const noticias: any[] = []; // placeholder hasta conectar Sanity
+const noticias: any[] = await sanityClient.fetch(QUERY_NOTICIAS).catch(() => []);
 
 function formatFecha(iso: string) {
   return new Date(iso).toLocaleDateString('es-ES', {

@@ -1,19 +1,15 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import BlogContent from '../../components/BlogContent';
 import { sanityClient, QUERY_NOTICIA_BY_SLUG, QUERY_NOTICIAS_SLUGS } from '../../lib/sanityClient';
 
 export async function getStaticPaths() {
-  // Cuando hayas configurado Sanity, descomenta:
-  // const slugs = await sanityClient.fetch(QUERY_NOTICIAS_SLUGS);
-  // return slugs.map((item: { slug: string }) => ({ params: { slug: item.slug } }));
-  return []; // placeholder hasta conectar Sanity
+  const slugs = await sanityClient.fetch(QUERY_NOTICIAS_SLUGS).catch(() => []);
+  return slugs.map((item: { slug: string }) => ({ params: { slug: item.slug } }));
 }
 
 const { slug } = Astro.params;
-
-// Cuando hayas configurado Sanity, descomenta:
-// const noticia = await sanityClient.fetch(QUERY_NOTICIA_BY_SLUG, { slug });
-const noticia: any = null; // placeholder
+const noticia = await sanityClient.fetch(QUERY_NOTICIA_BY_SLUG, { slug }).catch(() => null);
 
 if (!noticia) {
   return Astro.redirect('/novedades');
@@ -45,22 +41,17 @@ function formatFecha(iso: string) {
     {noticia.imagen?.asset?.url && (
       <img
         src={noticia.imagen.asset.url + '?w=1200&auto=format'}
-        alt={noticia.titulo}
-        style="width:100%; border-radius:8px; margin-bottom:2.5rem;"
+        alt={noticia.imagen.alt ?? noticia.titulo}
+        style="width:100%; border-radius:8px; margin-bottom:2.5rem; object-fit:cover; max-height:480px;"
       />
     )}
 
-    <!-- Portable Text — instala @portabletext/astro para renderizado rico -->
-    <!-- Por ahora renderizamos el contenido crudo como texto -->
     {noticia.contenido && (
-      <div class="blog-content">
-        {/* TODO: Usar <PortableText> de @portabletext/astro para renderizado completo */}
-        <p>{JSON.stringify(noticia.contenido)}</p>
-      </div>
+      <BlogContent content={noticia.contenido} client:load />
     )}
 
     <div style="margin-top: 3rem; border-top: 1px solid #eee; padding-top: 2rem;">
-      <a href="/novedades" style="color: inherit;">← Volver a Novedades</a>
+      <a href="/novedades" style="color: #c8a96e; font-weight: 600;">← Volver al Blog</a>
     </div>
 
   </article>
