@@ -1,5 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { sanityClient, QUERY_PAGINA_INICIO } from '../lib/sanityClient';
+
+const data = await sanityClient.fetch(QUERY_PAGINA_INICIO).catch(() => null);
+
+// Valores por defecto si Sanity no tiene contenido todavía
+const heroTitulo    = data?.heroTitulo    ?? 'Muebles de calidad para tu hogar';
+const heroSubtitulo = data?.heroSubtitulo ?? 'En Muebles Fran encontrarás el mobiliario que buscas para cada rincón de tu casa. Visítanos en nuestra tienda de Barcelona y déjate asesorar por nuestro equipo.';
+const productosTitulo    = data?.productosTitulo    ?? 'Nuestros productos';
+const productosSubtitulo = data?.productosSubtitulo ?? 'Encuentra todo lo que necesitas para amueblar tu hogar';
+const ventajasTitulo    = data?.ventajasTitulo    ?? 'Muebles Fran';
+const ventajasSubtitulo = data?.ventajasSubtitulo ?? 'Calidad, servicio y experiencia a tu disposición';
+const blogTitulo    = data?.blogTitulo    ?? 'Blog';
+const blogSubtitulo = data?.blogSubtitulo ?? 'Consejos, tendencias e inspiración para tu hogar';
+const docId = data?._id ?? 'pagina-inicio-singleton';
 ---
 
 <Layout
@@ -13,11 +27,8 @@ import Layout from '../layouts/Layout.astro';
       <div class="hero-inner">
         <div class="hero-text">
           <span class="hero-tag">📍 Barcelona</span>
-          <h1 class="hero-title">Muebles de calidad<br />para tu hogar</h1>
-          <p class="hero-desc">
-            En Muebles Fran encontrarás el mobiliario que buscas para cada rincón de tu casa.
-            Visítanos en nuestra tienda de Barcelona y déjate asesorar por nuestro equipo.
-          </p>
+          <h1 class="hero-title" data-sanity={`${docId};heroTitulo`}>{heroTitulo}</h1>
+          <p class="hero-desc" data-sanity={`${docId};heroSubtitulo`}>{heroSubtitulo}</p>
           <div class="hero-btns">
             <a href="#contacto" class="btn-primary-hero">
               📍 Cómo llegar
@@ -83,8 +94,8 @@ import Layout from '../layouts/Layout.astro';
   <section id="productos">
     <div class="container">
       <div class="productos-header">
-        <h2 class="section-title">Nuestros productos</h2>
-        <p class="section-subtitle">Encuentra todo lo que necesitas para amueblar tu hogar</p>
+        <h2 class="section-title" data-sanity={`${docId};productosTitulo`}>{productosTitulo}</h2>
+        <p class="section-subtitle" data-sanity={`${docId};productosSubtitulo`}>{productosSubtitulo}</p>
       </div>
       <div class="productos-grid">
         <a href="/salones" class="producto-card">
@@ -148,8 +159,8 @@ import Layout from '../layouts/Layout.astro';
   <section id="ventajas">
     <div class="container">
       <div class="ventajas-header">
-        <h2 class="section-title">Muebles Fran</h2>
-        <p class="section-subtitle">Calidad, servicio y experiencia a tu disposición</p>
+        <h2 class="section-title" data-sanity={`${docId};ventajasTitulo`}>{ventajasTitulo}</h2>
+        <p class="section-subtitle" data-sanity={`${docId};ventajasSubtitulo`}>{ventajasSubtitulo}</p>
       </div>
       <div class="ventajas-grid">
         <div class="ventaja">
@@ -288,8 +299,8 @@ import Layout from '../layouts/Layout.astro';
     <div class="container">
       <div class="blog-header">
         <div>
-          <h2 class="section-title">Blog</h2>
-          <p class="section-subtitle">Consejos, tendencias e inspiración para tu hogar</p>
+          <h2 class="section-title" data-sanity={`${docId};blogTitulo`}>{blogTitulo}</h2>
+          <p class="section-subtitle" data-sanity={`${docId};blogSubtitulo`}>{blogSubtitulo}</p>
         </div>
       </div>
       <div class="blog-grid">

@@ -1,17 +1,19 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
+import { presentationTool } from 'sanity/presentation';
 
 import noticia from './schemas/noticia';
 import configuracion from './schemas/configuracion';
 import paginaCategoria from './schemas/paginaCategoria';
+import paginaInicio from './schemas/paginaInicio';
+import paginaNosotros from './schemas/paginaNosotros';
 
 export default defineConfig({
   name: 'muebles-fran',
   title: 'Muebles Fran — Panel de contenido',
 
-  // ⚠️ Rellena estos dos valores con los de tu proyecto en sanity.io
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID ?? 'TU_PROJECT_ID',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID ?? '0g6vki0n',
   dataset: process.env.SANITY_STUDIO_DATASET ?? 'production',
 
   plugins: [
@@ -20,7 +22,7 @@ export default defineConfig({
         S.list()
           .title('Contenido')
           .items([
-            // Singleton: configuración (solo un documento)
+            // Singletons
             S.listItem()
               .title('⚙️  Datos de la Empresa')
               .id('configuracion')
@@ -29,16 +31,44 @@ export default defineConfig({
                   .schemaType('configuracion')
                   .documentId('configuracion-singleton')
               ),
+            S.listItem()
+              .title('🏠  Página de Inicio')
+              .id('paginaInicio')
+              .child(
+                S.document()
+                  .schemaType('paginaInicio')
+                  .documentId('pagina-inicio-singleton')
+              ),
+            S.listItem()
+              .title('👥  Página Nosotros')
+              .id('paginaNosotros')
+              .child(
+                S.document()
+                  .schemaType('paginaNosotros')
+                  .documentId('pagina-nosotros-singleton')
+              ),
             S.divider(),
             S.documentTypeListItem('noticia').title('📰  Novedades / Blog'),
             S.divider(),
             S.documentTypeListItem('paginaCategoria').title('🪑  Páginas de Categoría'),
           ]),
     }),
-    visionTool(), // Permite lanzar queries GROQ desde el Studio
+
+    presentationTool({
+      previewUrl: {
+        origin: 'https://astro-muebles-fran-web.vercel.app',
+        previewMode: {
+          enable: '/api/draft-mode/enable',
+        },
+      },
+      name: 'presentation',
+      title: '🌐 Vista previa web',
+    }),
+
+    visionTool(),
   ],
 
   schema: {
-    types: [noticia, configuracion, paginaCategoria],
+    types: [noticia, configuracion, paginaCategoria, paginaInicio, paginaNosotros],
   },
 });

@@ -1,5 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { sanityClient, QUERY_PAGINA_NOSOTROS } from '../lib/sanityClient';
+
+const data = await sanityClient.fetch(QUERY_PAGINA_NOSOTROS).catch(() => null);
+
+const heroTag       = data?.heroTag       ?? 'Tienda familiar · Barcelona';
+const heroTitulo    = data?.heroTitulo    ?? 'Una tienda familiar con años de experiencia';
+const heroSubtitulo = data?.heroSubtitulo ?? 'Desde hace décadas ayudamos a nuestros clientes a convertir sus casas en hogares, con muebles de calidad y un trato cercano y personalizado.';
+const historiaTag     = data?.historiaTag     ?? 'Nuestra historia';
+const historiaTitulo  = data?.historiaTitulo  ?? 'Muebles Fran, nacidos en Barcelona';
+const historiaP1      = data?.historiaParrafo1 ?? 'Muebles Fran es una tienda familiar ubicada en el corazón de Barcelona, especializada en mobiliario de calidad para el hogar. Llevamos años ayudando a nuestros clientes a encontrar el mueble perfecto para cada espacio.';
+const historiaP2      = data?.historiaParrafo2 ?? 'Nuestro equipo te asesora de forma personalizada para encontrar los muebles que mejor se adaptan a tu espacio, estilo y presupuesto. Ven a visitarnos y descubre nuestra amplia selección en exposición.';
+const compromisoTag    = data?.compromisoTag    ?? 'Nuestro compromiso';
+const compromisoTitulo = data?.compromisoTitulo ?? 'Calidad y asesoramiento personalizado';
+const compromisoP1     = data?.compromisoParrafo1 ?? 'Trabajamos con las mejores marcas del sector para ofrecerte muebles con la mejor relación calidad-precio. Cada pieza está seleccionada con mimo para garantizar durabilidad y estilo.';
+const compromisoP2     = data?.compromisoParrafo2 ?? 'Nuestros profesionales conocen a fondo cada producto y están listos para ayudarte a tomar la mejor decisión, sin presiones. Tu hogar, tu decisión.';
+const ctaTitulo    = data?.ctaTitulo    ?? '¿Listo para renovar tu hogar?';
+const ctaSubtitulo = data?.ctaSubtitulo ?? 'Visítanos en nuestra tienda de Barcelona o escríbenos. Estaremos encantados de ayudarte.';
+const docId = data?._id ?? 'pagina-nosotros-singleton';
 ---
 
 <Layout
@@ -19,9 +37,9 @@ import Layout from '../layouts/Layout.astro';
   <!-- ===== HERO ===== -->
   <section class="nos-hero">
     <div class="container">
-      <span class="nos-hero-tag">Tienda familiar · Barcelona</span>
-      <h1>Una tienda familiar con<br>años de experiencia</h1>
-      <p>Desde hace décadas ayudamos a nuestros clientes a convertir sus casas en hogares, con muebles de calidad y un trato cercano y personalizado.</p>
+      <span class="nos-hero-tag" data-sanity={`${docId};heroTag`}>{heroTag}</span>
+      <h1 data-sanity={`${docId};heroTitulo`}>{heroTitulo}</h1>
+      <p data-sanity={`${docId};heroSubtitulo`}>{heroSubtitulo}</p>
     </div>
   </section>
 
@@ -31,18 +49,10 @@ import Layout from '../layouts/Layout.astro';
       <img src="/img/gallery/salones-ambientes/sal-amb-12.jpg" alt="Ambiente de salón en exposición" loading="lazy"/>
     </div>
     <div class="nos-split-text">
-      <span class="gi-tag">Nuestra historia</span>
-      <h2>Muebles Fran,<br>nacidos en Barcelona</h2>
-      <p>
-        Muebles Fran es una tienda familiar ubicada en el corazón de Barcelona,
-        especializada en mobiliario de calidad para el hogar. Llevamos años ayudando
-        a nuestros clientes a encontrar el mueble perfecto para cada espacio.
-      </p>
-      <p>
-        Nuestro equipo te asesora de forma personalizada para encontrar los muebles
-        que mejor se adaptan a tu espacio, estilo y presupuesto. Ven a visitarnos
-        y descubre nuestra amplia selección en exposición.
-      </p>
+      <span class="gi-tag" data-sanity={`${docId};historiaTag`}>{historiaTag}</span>
+      <h2 data-sanity={`${docId};historiaTitulo`} set:html={historiaTitulo.replace(',', ',<br>')}></h2>
+      <p data-sanity={`${docId};historiaParrafo1`}>{historiaP1}</p>
+      <p data-sanity={`${docId};historiaParrafo2`}>{historiaP2}</p>
       <a href="/#contacto" class="btn-primary" style="margin-top: 8px; display: inline-block; width: fit-content;">📍 Visítanos en tienda</a>
     </div>
   </section>
@@ -50,17 +60,10 @@ import Layout from '../layouts/Layout.astro';
   <!-- ===== SEGUNDA SPLIT (reversed) ===== -->
   <section class="nos-split">
     <div class="nos-split-text" style="background: var(--gris-claro);">
-      <span class="gi-tag">Nuestro compromiso</span>
-      <h2>Calidad y asesoramiento<br>personalizado</h2>
-      <p>
-        Trabajamos con las mejores marcas del sector para ofrecerte muebles con la
-        mejor relación calidad-precio. Cada pieza está seleccionada con mimo para
-        garantizar durabilidad y estilo.
-      </p>
-      <p>
-        Nuestros profesionales conocen a fondo cada producto y están listos para
-        ayudarte a tomar la mejor decisión, sin presiones. Tu hogar, tu decisión.
-      </p>
+      <span class="gi-tag" data-sanity={`${docId};compromisoTag`}>{compromisoTag}</span>
+      <h2 data-sanity={`${docId};compromisoTitulo`}>{compromisoTitulo}</h2>
+      <p data-sanity={`${docId};compromisoParrafo1`}>{compromisoP1}</p>
+      <p data-sanity={`${docId};compromisoParrafo2`}>{compromisoP2}</p>
     </div>
     <div class="nos-split-img">
       <img src="/img/gallery/dormitorios-ambientes/0006-Arlex-003.jpg" alt="Ambiente de dormitorio en exposición" loading="lazy" style="filter: brightness(0.92);"/>
@@ -223,8 +226,8 @@ import Layout from '../layouts/Layout.astro';
   <!-- ===== CTA ===== -->
   <section class="nos-cta">
     <div class="container">
-      <h2>¿Listo para renovar tu hogar?</h2>
-      <p>Visítanos en nuestra tienda de Barcelona o escríbenos. Estaremos encantados de ayudarte.</p>
+      <h2 data-sanity={`${docId};ctaTitulo`}>{ctaTitulo}</h2>
+      <p data-sanity={`${docId};ctaSubtitulo`}>{ctaSubtitulo}</p>
       <div class="nos-cta-btns">
         <a href="/#contacto" class="btn-primary">📍 Cómo llegar</a>
         <a href="https://wa.me/34644484563?text=%C2%A1Hola!%20He%20visitado%20vuestra%20web%20y%20me%20gustar%C3%ADa%20obtener%20informaci%C3%B3n%20sin%20compromiso." target="_blank" rel="noopener" class="btn-outline">💬 WhatsApp</a>
