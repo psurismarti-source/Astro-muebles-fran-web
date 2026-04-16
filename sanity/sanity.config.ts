@@ -55,12 +55,7 @@ export default defineConfig({
     }),
 
     presentationTool({
-      previewUrl: {
-        origin: 'https://astro-muebles-fran-web.vercel.app',
-        previewMode: {
-          enable: '/api/draft-mode/enable',
-        },
-      },
+      previewUrl: 'https://astro-muebles-fran-web.vercel.app',
       name: 'presentation',
       title: '🌐 Vista previa web',
     }),
