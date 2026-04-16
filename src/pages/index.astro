@@ -1,8 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { sanityClient, QUERY_PAGINA_INICIO, ds } from '../lib/sanityClient';
+import { sanityClient, QUERY_PAGINA_INICIO, QUERY_NOTICIAS_RECIENTES, ds } from '../lib/sanityClient';
 
 const data = await sanityClient.fetch(QUERY_PAGINA_INICIO).catch(() => null);
+const noticias: any[] = await sanityClient.fetch(QUERY_NOTICIAS_RECIENTES(3)).catch(() => []);
+
+function formatFecha(iso: string) {
+  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+}
 
 // Valores por defecto si Sanity no tiene contenido todavía
 const heroTitulo    = data?.heroTitulo    ?? 'Muebles de calidad para tu hogar';
@@ -304,45 +309,40 @@ const docId = data?._id ?? 'pagina-inicio-singleton';
         </div>
       </div>
       <div class="blog-grid">
-        <article class="blog-card">
-          <div class="blog-img">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1" /><path d="M3 9h18M9 21V9" /></svg>
-            <span>📷 Imagen artículo</span>
-          </div>
-          <div class="blog-info">
-            <span class="blog-cat">Decoración</span>
-            <h3>Cómo elegir el sofá perfecto para tu salón</h3>
-            <p>Descubre los factores clave a tener en cuenta antes de comprar un sofá: tamaño, tejido, estructura y estilo.</p>
-            <a href="#" class="blog-link">Leer más →</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-img">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h20v5H2z" /><path d="M4 9v11m16-11v11" /><path d="M2 14h20" /></svg>
-            <span>📷 Imagen artículo</span>
-          </div>
-          <div class="blog-info">
-            <span class="blog-cat">Dormitorios</span>
-            <h3>Tendencias 2025 en dormitorios minimalistas</h3>
-            <p>El minimalismo sigue dominando el diseño de interiores. Te mostramos cómo aplicarlo en tu habitación.</p>
-            <a href="#" class="blog-link">Leer más →</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-img">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2z" /><path d="M5 22v-1a7 7 0 0 1 14 0v1" /></svg>
-            <span>📷 Imagen artículo</span>
-          </div>
-          <div class="blog-info">
-            <span class="blog-cat">Juvenil</span>
-            <h3>Ideas para habitaciones juveniles pequeñas</h3>
-            <p>Soluciones inteligentes de almacenaje y mobiliario multifuncional para aprovechar cada metro cuadrado.</p>
-            <a href="#" class="blog-link">Leer más →</a>
-          </div>
-        </article>
+        {noticias.length === 0 ? (
+          <p style="color:#888; grid-column:1/-1; text-align:center; padding:2rem 0;">
+            Los artículos del blog aparecerán aquí una vez se publiquen en el panel de contenido.
+          </p>
+        ) : (
+          noticias.map((noticia: any) => (
+            <a href={`/novedades/${noticia.slug}`} class="blog-card" style="text-decoration:none;color:inherit;">
+              <div class="blog-img">
+                {noticia.imagen?.asset?.url ? (
+                  <img
+                    src={noticia.imagen.asset.url + '?w=600&h=400&fit=crop&auto=format'}
+                    alt={noticia.titulo}
+                    loading="lazy"
+                    style="width:100%;height:100%;object-fit:cover;"
+                  />
+                ) : (
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+                )}
+              </div>
+              <div class="blog-info">
+                {noticia.fecha && <time class="blog-cat">{formatFecha(noticia.fecha)}</time>}
+                <h3>{noticia.titulo}</h3>
+                {noticia.resumen && <p>{noticia.resumen}</p>}
+                <span class="blog-link">Leer más →</span>
+              </div>
+            </a>
+          ))
+        )}
       </div>
+      {noticias.length > 0 && (
+        <div style="text-align:center; margin-top:2.5rem;">
+          <a href="/novedades" class="btn-outline-hero" style="display:inline-block;">Ver todos los artículos →</a>
+        </div>
+      )}
     </div>
   </section>
 
