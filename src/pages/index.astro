@@ -18,8 +18,40 @@ function formatFecha(iso: string) {
 }
 
 // Valores por defecto si Sanity no tiene contenido todavía
-const heroTitulo    = data?.heroTitulo    ?? 'Muebles de calidad para tu hogar';
-const heroSubtitulo = data?.heroSubtitulo ?? 'En Muebles Fran encontrarás el mobiliario que buscas para cada rincón de tu casa. Visítanos en nuestra tienda de Barcelona y déjate asesorar por nuestro equipo.';
+const heroBadge        = data?.heroBadge        ?? 'Barcelona · Desde 1998';
+const heroTitulo       = data?.heroTitulo       ?? 'Muebles con carácter para tu hogar en Barcelona.';
+const heroSubtitulo    = data?.heroSubtitulo    ?? 'Sofás, dormitorios, comedores y salones escogidos con criterio. Ven a tocar, probar y elegir — te asesoramos sin compromiso.';
+const heroCtaLlamar    = data?.heroCtaLlamar    ?? 'Llamar ahora';
+const heroCtaComoLlegar = data?.heroCtaComoLlegar ?? 'Cómo llegar';
+const heroCtaWhatsapp  = data?.heroCtaWhatsapp  ?? 'WhatsApp';
+
+const defaultMetaTags = [
+  'Tienda física en Barcelona',
+  'Más de 25 años sirviendo al barrio',
+  'Atención personalizada',
+];
+const heroMetaTags = (data?.heroMetaTags && data.heroMetaTags.length > 0) ? data.heroMetaTags : defaultMetaTags;
+
+const heroImagen = 'https://images.unsplash.com/photo-1618220179428-22790b461013?w=2200&q=80&auto=format&fit=crop';
+
+// Trust items (4 celdas bajo el hero): usa Sanity si existen, si no los valores por defecto
+const defaultTrustItems = [
+  { _key: 't1', numero: '01', titulo: 'Dirección', descripcion: direccion },
+  { _key: 't2', numero: '02', titulo: 'Teléfono',  descripcion: 'Te atendemos personalmente, sin IVRs ni esperas.' },
+  { _key: 't3', numero: '03', titulo: 'Horario',   descripcion: horario },
+  { _key: 't4', numero: '04', titulo: 'Parking',   descripcion: 'Parking gratuito para clientes. Ven sin prisas.' },
+];
+const trustItems = (data?.trustItems && data.trustItems.length > 0) ? data.trustItems : defaultTrustItems;
+const trustIcons = [
+  // 01 — pin
+  '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+  // 02 — phone
+  '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/>',
+  // 03 — clock
+  '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  // 04 — parking
+  '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/>',
+];
 const productosTitulo    = data?.productosTitulo    ?? 'Nuestros productos';
 const productosSubtitulo = data?.productosSubtitulo ?? 'Encuentra todo lo que necesitas para amueblar tu hogar';
 const ventajasTitulo    = data?.ventajasTitulo    ?? 'Muebles Fran';
@@ -47,74 +79,57 @@ const ventajas = data?.ventajas?.length > 0 ? data.ventajas : [
   description="Muebles Fran, tu tienda de muebles en Barcelona. Salones, dormitorios, cocinas, baños y juvenil. Gran Vía 1105, 08020 Barcelona."
 >
 
-  <!-- ===== HERO ===== -->
-  <section id="hero">
-    <div class="container">
-      <div class="hero-inner">
-        <div class="hero-text">
-          <span class="hero-tag">📍 Barcelona</span>
-          <h1 class="hero-title" data-sanity={ds(docId, 'paginaInicio', 'heroTitulo')}>{heroTitulo}</h1>
-          <p class="hero-desc" data-sanity={ds(docId, 'paginaInicio', 'heroSubtitulo')}>{heroSubtitulo}</p>
-          <div class="hero-btns">
-            <a href="#contacto" class="btn-primary-hero">
-              📍 Cómo llegar
-            </a>
-            <a href={`tel:+34${telefono.replace(/\s/g,'')}`} class="btn-outline-hero">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" /></svg>
-              {telefono}
-            </a>
-          </div>
+  <!-- ===== HERO (rediseño v2) ===== -->
+  <section id="hero" class="mf-hero">
+    <div class="mf-hero-bg" style={`background-image:url('${heroImagen}')`}></div>
+    <div class="container mf-hero-inner">
+      <div class="mf-hero-grid">
+        <div>
+          <div class="mf-eyebrow" data-sanity={ds(docId, 'paginaInicio', 'heroBadge')}>{heroBadge}</div>
+          <h1 class="mf-display" data-sanity={ds(docId, 'paginaInicio', 'heroTitulo')}>{heroTitulo}</h1>
         </div>
-        <div class="hero-video-outer">
-          <a href="https://youtu.be/V8Rl4zIDyt4" target="_blank" rel="noopener" class="hero-video-wrapper" aria-label="Ver vídeo de Muebles Fran en YouTube">
-            <img
-              src="https://img.youtube.com/vi/V8Rl4zIDyt4/maxresdefault.jpg"
-              alt="Muebles Fran — Ver vídeo"
-              class="hero-video-thumb"
-            />
-            <div class="hero-video-overlay">
-              <div class="hero-play-btn">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21" /></svg>
-              </div>
-              <span class="hero-video-label">Ver vídeo</span>
-            </div>
-          </a>
-
-          <div class="financiacion-badge">
-            <p class="badge-intro">Ahora, todos tus muebles</p>
-            <hr class="badge-line" />
-            <p class="badge-main">FINANCIACIÓN<br />HASTA <span class="badge-num">36</span><span class="badge-meses"> meses</span></p>
-            <hr class="badge-line" />
-            <p class="badge-sin">Sin intereses</p>
+        <div class="mf-hero-right">
+          <p class="mf-lead" data-sanity={ds(docId, 'paginaInicio', 'heroSubtitulo')}>{heroSubtitulo}</p>
+          <div class="mf-hero-ctas">
+            <a href={`tel:+34${telefono.replace(/\s/g,'')}`} class="mf-btn mf-btn-light">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+              <span data-sanity={ds(docId, 'paginaInicio', 'heroCtaLlamar')}>{heroCtaLlamar}</span>
+            </a>
+            <a href="#contacto" class="mf-btn mf-btn-ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span data-sanity={ds(docId, 'paginaInicio', 'heroCtaComoLlegar')}>{heroCtaComoLlegar}</span>
+            </a>
+            <a href={`https://wa.me/34${whatsapp.replace(/\s/g,'')}`} target="_blank" rel="noopener" class="mf-btn mf-btn-wa">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4 0-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3C8.6 21.5 10.3 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+              <span data-sanity={ds(docId, 'paginaInicio', 'heroCtaWhatsapp')}>{heroCtaWhatsapp}</span>
+            </a>
           </div>
         </div>
       </div>
+      <div class="mf-hero-meta">
+        {heroMetaTags.map((tag: string) => (
+          <span><span class="mf-hero-dot"></span>{tag}</span>
+        ))}
+      </div>
     </div>
+    <div class="mf-hero-scroll"><span>Scroll</span></div>
   </section>
 
-  <!-- ===== BARRA INFO ===== -->
-  <div class="info-bar">
-    <div class="container">
-      <div class="info-bar-inner">
-        <div class="info-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-          <span><strong>{direccion}</strong></span>
+  <!-- ===== BLOQUE TRUST (4 celdas) ===== -->
+  <section class="mf-trust-section">
+    <div class="mf-trust">
+      {trustItems.map((item: any, idx: number) => (
+        <div class="mf-trust-cell" data-sanity={item._key ? ds(docId, 'paginaInicio', `trustItems[_key=="${item._key}"]`) : undefined}>
+          <div class="mf-trust-num">{item.numero ?? String(idx + 1).padStart(2, '0')}</div>
+          <div class="mf-trust-ico">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={trustIcons[idx] ?? trustIcons[0]}></svg>
+          </div>
+          <h3>{item.titulo}</h3>
+          <p>{item.descripcion}</p>
         </div>
-        <div class="info-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16z" /></svg>
-          <a href={`tel:+34${telefono.replace(/\s/g,'')}`}><strong>{telefono}</strong></a>
-        </div>
-        <div class="info-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-          <span><strong>{horario}</strong></span>
-        </div>
-        <div class="info-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 17V7h4a3 3 0 0 1 0 6H9" /></svg>
-          <span><strong>Parking gratuito</strong> para clientes</span>
-        </div>
-      </div>
+      ))}
     </div>
-  </div>
+  </section>
 
   <!-- ===== PRODUCTOS ===== -->
   <section id="productos">

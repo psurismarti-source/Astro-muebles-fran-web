@@ -30,10 +30,75 @@ export default defineType({
     }),
     defineField({
       name: 'heroCta',
-      title: 'Hero — Botón (texto)',
+      title: 'Hero — Botón (texto) [legacy, ya no se usa en el nuevo hero]',
       type: 'string',
       initialValue: 'Ver colecciones',
       group: 'hero',
+    }),
+    defineField({
+      name: 'heroMetaTags',
+      title: 'Hero — Tags inferiores (3 frases cortas)',
+      description: 'Aparecen en la franja inferior del hero, separadas por un punto.',
+      type: 'array',
+      of: [{ type: 'string' }],
+      validation: (Rule) => Rule.max(3).warning('Idealmente 3 tags'),
+      initialValue: [
+        'Tienda física en Barcelona',
+        'Más de 25 años sirviendo al barrio',
+        'Atención personalizada',
+      ],
+      group: 'hero',
+    }),
+    defineField({
+      name: 'heroCtaLlamar',
+      title: 'Hero — Texto del botón "Llamar"',
+      type: 'string',
+      initialValue: 'Llamar ahora',
+      group: 'hero',
+    }),
+    defineField({
+      name: 'heroCtaComoLlegar',
+      title: 'Hero — Texto del botón "Cómo llegar"',
+      type: 'string',
+      initialValue: 'Cómo llegar',
+      group: 'hero',
+    }),
+    defineField({
+      name: 'heroCtaWhatsapp',
+      title: 'Hero — Texto del botón "WhatsApp"',
+      type: 'string',
+      initialValue: 'WhatsApp',
+      group: 'hero',
+    }),
+
+    // ── TRUST (4 celdas bajo el hero) ─────────────────────────────────
+    defineField({
+      name: 'trustItems',
+      title: 'Bloque de 4 celdas bajo el hero',
+      description: 'Dirección, Teléfono, Horario, Parking. Mantén 4 elementos.',
+      type: 'array',
+      group: 'trust',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({ name: 'numero',      title: 'Número (01, 02, …)', type: 'string' }),
+            defineField({ name: 'titulo',      title: 'Título',             type: 'string' }),
+            defineField({ name: 'descripcion', title: 'Descripción',        type: 'text', rows: 2 }),
+          ],
+          preview: {
+            select: { title: 'titulo', subtitle: 'descripcion' },
+            prepare({ title, subtitle }) { return { title, subtitle } },
+          },
+        }),
+      ],
+      validation: (Rule) => Rule.length(4).warning('Deben ser exactamente 4 celdas'),
+      initialValue: [
+        { _key: 't1', numero: '01', titulo: 'Dirección', descripcion: 'Gran Vía de les Corts Catalanes, 1105 · 08020 Barcelona' },
+        { _key: 't2', numero: '02', titulo: 'Teléfono',  descripcion: 'Te atendemos personalmente, sin IVRs ni esperas.' },
+        { _key: 't3', numero: '03', titulo: 'Horario',   descripcion: 'Lun–Vie · 9:30–13:30 / 16:30–20:30 · Sábados 10:00–14:00' },
+        { _key: 't4', numero: '04', titulo: 'Parking',   descripcion: 'Parking gratuito para clientes. Ven sin prisas.' },
+      ],
     }),
 
     // ── VENTAJAS ──────────────────────────────────────────────────────
@@ -148,6 +213,7 @@ export default defineType({
 
   groups: [
     { name: 'hero', title: '🎬 Hero' },
+    { name: 'trust', title: '🔢 Celdas bajo el hero' },
     { name: 'productos', title: '🛋️ Productos' },
     { name: 'ventajas', title: '⭐ Ventajas' },
     { name: 'blog', title: '📰 Blog' },
