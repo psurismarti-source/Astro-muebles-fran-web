@@ -1682,6 +1682,15 @@ body .section-subtitle {
   font-weight: 400;
   margin-bottom: 48px;
   max-width: 64ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Si el parent es text-align: left (como en .blog-header), alinea a la izquierda */
+.blog-header .section-subtitle,
+.contacto-info .section-subtitle {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /* Página interior (page-hero en /nosotros, categorías, etc.) */
@@ -1866,6 +1875,29 @@ body .cat-hero-tag {
   padding: 0;
   margin-bottom: 24px;
   display: inline-block;
+}
+
+/* Eyebrow .gi-tag (usado en nosotros, categorías) — sobre fondo claro */
+body .gi-tag {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--mf-grey-2, #6b6b6b);
+  margin-bottom: 22px;
+}
+/* .gi-tag sobre fondo oscuro (dentro de .gi-text en ventajas, parking) */
+body .gi-text .gi-tag,
+body .gi-dark .gi-tag {
+  color: rgba(255,255,255,.6);
+}
+body .gi-text h2 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(28px, 3.4vw, 48px);
 }
 
 /* El botón de producto "Reservar cita" negro → pill */

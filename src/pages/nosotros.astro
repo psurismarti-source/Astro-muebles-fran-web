@@ -247,28 +247,32 @@ const docId = data?._id ?? 'pagina-nosotros-singleton';
   }
   .nos-hero-tag {
     display: inline-block;
-    border: 1px solid rgba(0,0,0,0.18);
-    color: rgba(0,0,0,0.55);
-    font-size: 0.72rem;
-    letter-spacing: 2.5px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    padding: 5px 16px;
-    border-radius: 2px;
-    margin-bottom: 20px;
+    font-weight: 500;
+    color: rgba(0,0,0,0.55);
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 28px;
   }
   .nos-hero h1 {
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 18px;
-    line-height: 1.15;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: clamp(36px, 5.5vw, 72px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    line-height: 1.05;
   }
   .nos-hero p {
-    color: var(--gris-medio);
-    font-size: 1.1rem;
-    max-width: 560px;
+    color: #4a4a4a;
+    font-size: clamp(15px, 1.1vw, 18px);
+    max-width: 58ch;
     margin: 0 auto;
-    line-height: 1.7;
+    line-height: 1.55;
+    font-weight: 400;
   }
 
   /* Split story section */
@@ -292,20 +296,21 @@ const docId = data?._id ?? 'pagina-nosotros-singleton';
     background: #fff;
   }
   .nos-split-text .gi-tag {
-    margin-bottom: 16px;
+    margin-bottom: 22px;
   }
   .nos-split-text h2 {
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 700;
-    letter-spacing: -0.3px;
-    margin-bottom: 20px;
-    line-height: 1.2;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: clamp(28px, 3.4vw, 48px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    line-height: 1.08;
   }
   .nos-split-text p {
-    color: var(--gris-medio);
-    font-size: 1.05rem;
-    line-height: 1.75;
-    margin-bottom: 16px;
+    color: #4a4a4a;
+    font-size: clamp(15px, 1.05vw, 17px);
+    line-height: 1.6;
+    margin-bottom: 18px;
   }
 
   /* Values grid */
