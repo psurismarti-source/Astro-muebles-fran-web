@@ -28,6 +28,9 @@ export const QUERY_PAGINA_INICIO = `
   *[_type == "paginaInicio" && _id == "pagina-inicio-singleton"][0] {
     _id,
     heroBadge, heroTitulo, heroSubtitulo, heroCta,
+    heroMetaTags,
+    heroCtaLlamar, heroCtaComoLlegar, heroCtaWhatsapp,
+    trustItems[] { _key, numero, titulo, descripcion },
     productosTitulo, productosSubtitulo,
     ventajasTitulo, ventajasSubtitulo,
     ventajas[] { _key, icono, titulo, descripcion },
