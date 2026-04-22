@@ -1656,3 +1656,222 @@ body > .header-v2 ~ main > :first-child,
 body > .header-v2 ~ :first-of-type {
   /* no-op, el hero ya tiene padding-top propio */
 }
+
+/* ============================================================
+   REDISEÑO 2026-04 (fase 2) — Coherencia tipográfica y botones
+   Aplico la estética del nuevo hero al resto del sitio:
+   Helvetica Neue light para títulos, botones pill, paragrafos
+   con tono minimal. Todo sigue siendo OVERRIDE aislado, así
+   que borrando esta sección se vuelve al estilo anterior.
+   ============================================================ */
+
+/* ---------- Tipografía global de secciones ---------- */
+body .section-title {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(32px, 4vw, 54px);
+  color: var(--mf-ink, #0a0a0a);
+  margin-bottom: 16px;
+}
+body .section-subtitle {
+  font-size: clamp(15px, 1.1vw, 18px);
+  color: var(--mf-grey-1, #4a4a4a);
+  line-height: 1.55;
+  font-weight: 400;
+  margin-bottom: 48px;
+  max-width: 64ch;
+}
+
+/* Página interior (page-hero en /nosotros, categorías, etc.) */
+body .page-hero h1 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* Tarjetas de productos/ventajas: que los h3 tengan peso media */
+body .producto-card h3,
+body .ventaja h3,
+body .blog-card h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Textos secundarios (párrafos de cards) con grises más uniformes */
+body .producto-card p,
+body .ventaja p,
+body .blog-card p {
+  color: var(--mf-grey-2, #6b6b6b);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+/* Footer headings consistentes */
+body .footer-links h4,
+body footer h4 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--mf-grey-3, #9a9a9a);
+}
+
+/* ---------- Botones coherentes con el hero ---------- */
+/* Pill principal (antes .btn-primary) */
+body .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--mf-ink, #0a0a0a);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  border: 1px solid var(--mf-ink, #0a0a0a);
+  transition: all .3s cubic-bezier(.2,.7,.2,1);
+  white-space: nowrap;
+}
+body .btn-primary:hover {
+  background: #2a2a2a;
+  transform: translateY(-1px);
+}
+
+/* Pill outline (antes .btn-outline) */
+body .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--mf-ink, #0a0a0a);
+  color: var(--mf-ink, #0a0a0a);
+  padding: 13px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  background: transparent;
+  transition: all .3s cubic-bezier(.2,.7,.2,1);
+}
+body .btn-outline:hover {
+  background: var(--mf-ink, #0a0a0a);
+  color: #fff;
+}
+
+/* Pill light (para fondos oscuros: antes .btn-white) */
+body .btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: var(--mf-ink, #0a0a0a);
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  border: 1px solid #fff;
+  transition: all .3s cubic-bezier(.2,.7,.2,1);
+}
+body .btn-white:hover { background: var(--mf-cream, #f5f4f2); }
+
+/* Pill ghost sobre fondo oscuro (antes .btn-white-outline) */
+body .btn-white-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: #fff !important;
+  padding: 13px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  border: 1px solid rgba(255,255,255,.7);
+  transition: all .3s cubic-bezier(.2,.7,.2,1);
+}
+body .btn-white-outline:hover {
+  background: #fff;
+  color: var(--mf-ink, #0a0a0a) !important;
+  border-color: #fff;
+}
+
+/* Parking banner CTA como pill ghost clarito */
+body .parking-banner-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.5);
+  color: rgba(255,255,255,.9);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  background: transparent;
+  transition: all .3s cubic-bezier(.2,.7,.2,1);
+}
+body .parking-banner-cta:hover {
+  border-color: #fff;
+  color: #fff;
+  background: rgba(255,255,255,.08);
+}
+
+/* CTAs grandes de la sección Contacto — mantengo su forma horizontal
+   pero suavizo esquinas y uniformizo tipografía */
+body .cta-grande {
+  border-radius: 14px;
+  transition: all .35s cubic-bezier(.2,.7,.2,1);
+}
+body .cta-grande-label {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  font-size: 15px;
+}
+body .cta-grande-sub {
+  font-weight: 400;
+  font-size: 13px;
+}
+
+/* Blog link (→ "Leer más") consistente con estilo minimal */
+body .blog-link {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-size: 13px;
+  text-transform: none;
+}
+
+/* Tag del hero interior (.hero-tag en nosotros/categoría) como eyebrow */
+body .page-hero .hero-tag,
+body .nos-hero-tag,
+body .cat-hero-tag {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(255,255,255,.75);
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-bottom: 24px;
+  display: inline-block;
+}
+
+/* El botón de producto "Reservar cita" negro → pill */
+body .producto-card .btn-primary {
+  border-radius: 999px !important;
+  padding: 12px 22px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
