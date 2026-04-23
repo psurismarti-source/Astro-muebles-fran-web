@@ -25,6 +25,7 @@
 
 import { createClient } from '@sanity/client';
 import { htmlToBlocks } from '@sanity/block-tools';
+import { Schema } from '@sanity/schema';
 import { JSDOM } from 'jsdom';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -60,47 +61,58 @@ const sanity = createClient({
 });
 
 // ── Esquema de bloques para block-tools ──────────────────────────────────────
-// Describe el subset del schema "noticia.contenido" para que block-tools sepa
-// qué estilos/marks/tipos están permitidos. Debe coincidir con sanity/schemas/noticia.ts.
+// block-tools necesita el schema COMPILADO (no un objeto plano). Así que
+// declaramos el type 'noticia' con la misma estructura que sanity/schemas/noticia.ts
+// y lo compilamos con @sanity/schema. Luego extraemos el type del field 'contenido'.
 
-const noticiaBlockSchema = {
-  name: 'noticia',
-  title: 'Noticia',
-  type: 'document',
-  fields: [
+const compiledSchema = Schema.compile({
+  name: 'default',
+  types: [
     {
-      name: 'contenido',
-      title: 'Contenido',
-      type: 'array',
-      of: [
+      type: 'object',
+      name: 'noticia',
+      fields: [
         {
-          type: 'block',
-          styles: [
-            { title: 'Normal', value: 'normal' },
-            { title: 'H2', value: 'h2' },
-            { title: 'H3', value: 'h3' },
-            { title: 'Cita', value: 'blockquote' },
-          ],
-          marks: {
-            decorators: [
-              { title: 'Negrita', value: 'strong' },
-              { title: 'Cursiva', value: 'em' },
-            ],
-            annotations: [
-              {
-                name: 'link',
-                type: 'object',
-                title: 'Enlace',
-                fields: [{ name: 'href', type: 'url', title: 'URL' }],
+          name: 'contenido',
+          type: 'array',
+          of: [
+            {
+              type: 'block',
+              styles: [
+                { title: 'Normal', value: 'normal' },
+                { title: 'H2', value: 'h2' },
+                { title: 'H3', value: 'h3' },
+                { title: 'Cita', value: 'blockquote' },
+              ],
+              lists: [
+                { title: 'Lista', value: 'bullet' },
+                { title: 'Numerada', value: 'number' },
+              ],
+              marks: {
+                decorators: [
+                  { title: 'Negrita', value: 'strong' },
+                  { title: 'Cursiva', value: 'em' },
+                ],
+                annotations: [
+                  {
+                    name: 'link',
+                    type: 'object',
+                    fields: [{ name: 'href', type: 'url' }],
+                  },
+                ],
               },
-            ],
-          },
+            },
+            { type: 'image', fields: [{ name: 'alt', type: 'string' }] },
+          ],
         },
-        { type: 'image', fields: [{ name: 'alt', type: 'string' }] },
       ],
     },
   ],
-};
+});
+
+const blockContentType = compiledSchema
+  .get('noticia')
+  .fields.find((f) => f.name === 'contenido').type;
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -205,7 +217,7 @@ async function uploadInlineImagesAndRewriteHtml(html) {
 
 function htmlBlocksFromDom(dom) {
   const body = dom.window.document.body;
-  const blocks = htmlToBlocks(body.innerHTML, noticiaBlockSchema, {
+  const blocks = htmlToBlocks(body.innerHTML, blockContentType, {
     parseHtml: (h) => new JSDOM(h).window.document,
   });
   return blocks;
@@ -224,7 +236,7 @@ function buildPortableText(dom, inlineImageReplacements) {
     if (chunk.length === 0) return;
     const html = chunk.join('');
     chunk.length = 0;
-    const blocks = htmlToBlocks(html, noticiaBlockSchema, {
+    const blocks = htmlToBlocks(html, blockContentType, {
       parseHtml: (h) => new JSDOM(h).window.document,
     });
     out.push(...blocks);
