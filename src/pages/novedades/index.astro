@@ -37,7 +37,7 @@ function formatFecha(iso: string) {
 
       <div class="blog-grid">
         {noticias.map((noticia: any) => (
-          <a href={`/novedades/${noticia.slug}`} class="blog-card" data-sanity={ds(noticia._id, 'noticia', '')}>
+          <a href={`/novedades/${noticia.slug}`} class="blog-card">
             {noticia.imagen?.asset?.url && (
               <div class="blog-card-img">
                 <img
