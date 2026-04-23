@@ -332,7 +332,7 @@ const ventajas = data?.ventajas?.length > 0 ? data.ventajas : [
           </p>
         ) : (
           noticias.map((noticia: any) => (
-            <a href={`/novedades/${noticia.slug}`} class="blog-card" style="text-decoration:none;color:inherit;" data-sanity={ds(noticia._id, 'noticia', '')}>
+            <a href={`/novedades/${noticia.slug}`} class="blog-card" style="text-decoration:none;color:inherit;">
               <div class="blog-img">
                 {noticia.imagen?.asset?.url ? (
                   <img
