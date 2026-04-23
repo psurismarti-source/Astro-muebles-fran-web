@@ -21,6 +21,36 @@ export function ds(id: string | undefined, type: string, path: string): string |
   }).toString();
 }
 
+// ─── HELPERS de teléfono ──────────────────────────────────────────────────────
+/**
+ * Normaliza un teléfono ES: quita espacios, '+', y el prefijo 34 si viene ya.
+ * Devuelve los 9 dígitos del número nacional. Útil para construir wa.me y tel:
+ */
+export function cleanPhoneES(raw: string | undefined): string {
+  if (!raw) return '';
+  return String(raw).replace(/[\s+]/g, '').replace(/^34/, '');
+}
+
+/** Devuelve la URL de wa.me limpia: wa.me/34XXXXXXXXX */
+export function whatsappUrl(raw: string | undefined): string {
+  return `https://wa.me/34${cleanPhoneES(raw)}`;
+}
+
+/** Devuelve la URL tel: con prefijo: tel:+34XXXXXXXXX */
+export function telUrl(raw: string | undefined): string {
+  return `tel:+34${cleanPhoneES(raw)}`;
+}
+
+/**
+ * Formatea un teléfono ES para mostrar: "+34 644 48 45 63"
+ * Si el número no tiene 9 dígitos, devuelve lo que sea pasado tal cual.
+ */
+export function formatPhoneES(raw: string | undefined): string {
+  const clean = cleanPhoneES(raw);
+  if (clean.length !== 9) return raw ?? '';
+  return `+34 ${clean.slice(0, 3)} ${clean.slice(3, 5)} ${clean.slice(5, 7)} ${clean.slice(7, 9)}`;
+}
+
 // ─── QUERIES ──────────────────────────────────────────────────────────────────
 
 /** Página de Inicio (singleton) */
@@ -34,6 +64,7 @@ export const QUERY_PAGINA_INICIO = `
     productosTitulo, productosSubtitulo,
     ventajasTitulo, ventajasSubtitulo,
     ventajas[] { _key, icono, titulo, descripcion },
+    resenasTitulo, resenasSubtitulo, resenasEmbed,
     blogTitulo, blogSubtitulo,
     parkingTitulo, parkingDescripcion, parkingCta,
     contactoTitulo, contactoSubtitulo
