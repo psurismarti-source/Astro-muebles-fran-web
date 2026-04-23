@@ -23,3 +23,6 @@ yarn-error.log*
 # Editor
 .vscode/
 .idea/
+
+# Reportes de migración (se generan localmente, no se versionan)
+scripts/reports/
