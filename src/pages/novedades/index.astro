@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { sanityClient, QUERY_NOTICIAS } from '../../lib/sanityClient';
+import { sanityClient, QUERY_NOTICIAS, ds } from '../../lib/sanityClient';
 
 const noticias: any[] = await sanityClient.fetch(QUERY_NOTICIAS).catch(() => []);
 
@@ -37,20 +37,21 @@ function formatFecha(iso: string) {
 
       <div class="blog-grid">
         {noticias.map((noticia: any) => (
-          <a href={`/novedades/${noticia.slug}`} class="blog-card">
+          <a href={`/novedades/${noticia.slug}`} class="blog-card" data-sanity={ds(noticia._id, 'noticia', '')}>
             {noticia.imagen?.asset?.url && (
               <div class="blog-card-img">
                 <img
                   src={noticia.imagen.asset.url + '?w=600&auto=format'}
                   alt={noticia.titulo}
                   loading="lazy"
+                  data-sanity={ds(noticia._id, 'noticia', 'imagen')}
                 />
               </div>
             )}
             <div class="blog-card-body">
-              <time class="blog-card-date">{formatFecha(noticia.fecha)}</time>
-              <h2 class="blog-card-title">{noticia.titulo}</h2>
-              {noticia.resumen && <p class="blog-card-excerpt">{noticia.resumen}</p>}
+              <time class="blog-card-date" data-sanity={ds(noticia._id, 'noticia', 'fecha')}>{formatFecha(noticia.fecha)}</time>
+              <h2 class="blog-card-title" data-sanity={ds(noticia._id, 'noticia', 'titulo')}>{noticia.titulo}</h2>
+              {noticia.resumen && <p class="blog-card-excerpt" data-sanity={ds(noticia._id, 'noticia', 'resumen')}>{noticia.resumen}</p>}
               <span class="blog-card-cta">Leer más →</span>
             </div>
           </a>
