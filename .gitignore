@@ -26,3 +26,7 @@ yarn-error.log*
 
 # Reportes de migración (se generan localmente, no se versionan)
 scripts/reports/
+
+# Backups de Sanity (se generan localmente, no se versionan)
+backup-*.tar.gz
+*.dataset.tar.gz
