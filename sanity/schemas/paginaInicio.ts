@@ -137,6 +137,31 @@ export default defineType({
       ],
     }),
 
+    // ── RESEÑAS ───────────────────────────────────────────────────────
+    defineField({
+      name: 'resenasTitulo',
+      title: 'Reseñas — Título sección',
+      type: 'string',
+      initialValue: 'Lo que dicen nuestros clientes',
+      group: 'resenas',
+    }),
+    defineField({
+      name: 'resenasSubtitulo',
+      title: 'Reseñas — Subtítulo',
+      type: 'string',
+      initialValue: 'Opiniones verificadas en Google de quienes ya nos conocen',
+      group: 'resenas',
+    }),
+    defineField({
+      name: 'resenasEmbed',
+      title: 'Reseñas — Código embed (HTML del widget)',
+      description:
+        'Pega aquí el código embed completo del widget de reseñas (TrustIndex, Elfsight, Google Reviews, etc.). Deja en blanco para no mostrar la sección.',
+      type: 'text',
+      rows: 6,
+      group: 'resenas',
+    }),
+
     // ── PRODUCTOS ─────────────────────────────────────────────────────
     defineField({
       name: 'productosTitulo',
@@ -216,6 +241,7 @@ export default defineType({
     { name: 'trust', title: '🔢 Celdas bajo el hero' },
     { name: 'productos', title: '🛋️ Productos' },
     { name: 'ventajas', title: '⭐ Ventajas' },
+    { name: 'resenas', title: '🌟 Reseñas' },
     { name: 'blog', title: '📰 Blog' },
     { name: 'parking', title: '🅿️ Parking' },
     { name: 'contacto', title: '📍 Contacto' },
