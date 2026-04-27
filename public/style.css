@@ -1927,3 +1927,171 @@ body .producto-card .btn-primary {
 }
 /* TrustIndex y otros widgets suelen traer su propio estilo, solo aseguramos centrado */
 .mf-resenas-embed > * { max-width: 100%; }
+
+/* ============================================================
+   RESPONSIVE 2026-04 — Pase mobile-first sobre toda la web
+   Breakpoints: 1024 (tablet) · 768 (mobile grande) · 480 (mobile)
+   Todo OVERRIDE al final, sin tocar reglas anteriores.
+   ============================================================ */
+
+/* ---- Reset general: evitar scroll horizontal en móvil ---- */
+html, body { overflow-x: hidden; }
+img, video, iframe { max-width: 100%; height: auto; }
+
+/* ---- Container responsive ---- */
+@media (max-width: 768px) {
+  .container { padding: 0 18px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 14px; }
+}
+
+/* ---- Sections con padding más cómodo en móvil ---- */
+@media (max-width: 768px) {
+  section { padding: 56px 0; }
+}
+@media (max-width: 480px) {
+  section { padding: 44px 0; }
+  /* Excepciones: hero a pantalla completa */
+  section.mf-hero, section#hero.mf-hero { padding: var(--mf-hdr-h) 0 0; }
+  .mf-trust-section { padding: 0 !important; }
+}
+
+/* ---- Tipografía responsive global ---- */
+@media (max-width: 768px) {
+  body .section-title { font-size: clamp(28px, 6.5vw, 38px); margin-bottom: 12px; }
+  body .section-subtitle { font-size: 15px; margin-bottom: 32px; }
+}
+@media (max-width: 480px) {
+  body .section-title { font-size: clamp(24px, 7.5vw, 32px); }
+  body .section-subtitle { font-size: 14px; max-width: 100%; }
+}
+
+/* ---- Hero v2: ajustes finos ---- */
+@media (max-width: 480px) {
+  .mf-hero { min-height: 92vh; min-height: 92svh; }
+  .mf-display { font-size: clamp(30px, 9vw, 44px); }
+  .mf-eyebrow { font-size: 10px; letter-spacing: 0.2em; margin-bottom: 18px; }
+  .mf-lead { font-size: 15px; }
+  .mf-hero-meta { font-size: 10px; gap: 8px; padding-top: 18px; margin-top: 32px; }
+  .mf-hero-inner { padding-bottom: 36px; }
+  .mf-hero-scroll { display: none; }
+}
+
+/* ---- Trust v2 (4 celdas): refinar paddings en móvil ---- */
+@media (max-width: 480px) {
+  .mf-trust-cell { padding: 28px 20px; gap: 10px; }
+  .mf-trust-cell h3 { font-size: 16px; }
+  .mf-trust-cell p { font-size: 13.5px; }
+}
+
+/* ---- Productos: grids más sólidas en móvil ---- */
+@media (max-width: 1024px) {
+  .productos-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 480px) {
+  .productos-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
+  .producto-card h3 { font-size: 18px; }
+  .producto-card p { font-size: 14px; }
+}
+
+/* ---- Ventajas: 4 → 2 → 1 columnas ---- */
+@media (max-width: 768px) {
+  .ventajas-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 480px) {
+  .ventajas-grid { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* ---- Parking banner: layout vertical y centrado en móvil ---- */
+@media (max-width: 768px) {
+  .parking-banner-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 22px 0;
+  }
+  .parking-banner-text strong { font-size: 16px; }
+  .parking-banner-text span { font-size: 13.5px; }
+  .parking-banner-cta { width: auto; align-self: center; }
+}
+
+/* ---- Contacto: layout y CTAs grandes ---- */
+@media (max-width: 1024px) {
+  .contacto-inner { grid-template-columns: 1fr; gap: 32px; }
+  .mapa-wrapper iframe { height: 320px; }
+}
+@media (max-width: 768px) {
+  .contacto-info h2 { font-size: 1.5rem; }
+  .contacto-dato { gap: 12px; margin-bottom: 14px; }
+  .contacto-dato-icon { width: 36px; height: 36px; }
+  .cta-grande { padding: 14px 16px; gap: 12px; }
+  .cta-grande-icon { width: 38px; height: 38px; }
+  body .cta-grande-label { font-size: 14px; }
+  body .cta-grande-sub { font-size: 12.5px; }
+}
+@media (max-width: 480px) {
+  .mapa-wrapper iframe { height: 260px; }
+}
+
+/* ---- Blog grid responsive ---- */
+@media (max-width: 1024px) {
+  .blog-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+}
+@media (max-width: 600px) {
+  .blog-grid { grid-template-columns: 1fr; gap: 18px; }
+}
+@media (max-width: 480px) {
+  .blog-card h3, .blog-card-title { font-size: 17px; }
+  .blog-info, .blog-card-body { padding: 18px 16px; }
+}
+
+/* ---- Footer responsive ---- */
+@media (max-width: 768px) {
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+}
+@media (max-width: 480px) {
+  .footer-inner { grid-template-columns: 1fr; gap: 24px; text-align: left; }
+  .footer-bottom { font-size: 12px; flex-direction: column; gap: 6px; text-align: center; }
+}
+
+/* ---- Mobile menu (overlay del header) refinamientos ---- */
+@media (max-width: 480px) {
+  .header-v2 .mobile-menu a { padding: 13px 22px; font-size: 14.5px; }
+  .header-v2 .mobile-menu .mobile-section-title { padding: 12px 22px 4px; }
+  .mobile-menu-ctas { padding: 16px 22px 8px; }
+  .mobile-menu-ctas .mm-cta { font-size: 13.5px; }
+}
+
+/* ---- Página /nosotros responsive ---- */
+@media (max-width: 768px) {
+  body .nos-split { grid-template-columns: 1fr !important; min-height: auto !important; }
+  body .nos-split-img { min-height: 240px; }
+  body .nos-split-text { padding: 36px 22px !important; }
+  body .nos-valores-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 18px !important; }
+}
+@media (max-width: 480px) {
+  body .nos-valores-grid { grid-template-columns: 1fr !important; }
+  body .nos-fotos-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ---- Página interior categorías (page-hero) ---- */
+@media (max-width: 768px) {
+  .page-hero { padding: 56px 0 40px !important; }
+  body .page-hero h1 { font-size: clamp(28px, 7vw, 44px); }
+}
+
+/* ---- Sección Reseñas responsive ---- */
+@media (max-width: 768px) {
+  .mf-resenas-section { padding: 56px 0 32px; }
+  .mf-resenas-section .mf-resenas-header { margin-bottom: 28px !important; }
+}
+
+/* ---- Botón flotante de WhatsApp: que no tape contenido en móvil pequeño ---- */
+@media (max-width: 480px) {
+  .wa-btn, [class*="wa-float"] { right: 14px !important; bottom: 14px !important; }
+}
