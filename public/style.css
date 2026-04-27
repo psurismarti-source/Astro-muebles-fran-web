@@ -1381,6 +1381,42 @@ html { scroll-padding-top: var(--mf-hdr-h); }
 }
 .header-v2 .mobile-menu.open { display: flex; }
 
+/* Mobile menu — desplegable Muebles (HTML <details>) */
+.header-v2 .mob-muebles { border-bottom: 1px solid var(--mf-line); }
+.header-v2 .mob-muebles summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 32px;
+  font-size: 15px;
+  color: var(--mf-ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+.header-v2 .mob-muebles summary::-webkit-details-marker { display: none; }
+.header-v2 .mob-muebles-arrow {
+  transition: transform .25s var(--mf-ease);
+  opacity: .55;
+  flex-shrink: 0;
+}
+.header-v2 .mob-muebles[open] .mob-muebles-arrow {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+.header-v2 .mob-muebles a {
+  padding: 12px 32px 12px 52px;
+  font-size: 14.5px;
+  color: var(--mf-grey-1);
+  border-bottom: 1px solid var(--mf-line);
+  display: block;
+}
+.header-v2 .mob-muebles a:last-child { border-bottom: none; }
+.header-v2 .mob-muebles[open] summary {
+  background: var(--mf-cream);
+  border-bottom: 1px solid var(--mf-line);
+}
+
 /* Mobile menu CTAs (fondo) */
 .mobile-menu-ctas {
   display: flex;
@@ -1630,17 +1666,12 @@ html { scroll-padding-top: var(--mf-hdr-h); }
   margin: 0;
 }
 
-/* Responsive trust */
+/* Responsive trust — 4 → 2×2 (siempre 2 columnas en móvil) */
 @media (max-width: 900px) {
   .mf-trust { grid-template-columns: repeat(2, 1fr); }
-  .mf-trust-cell:nth-child(2) { border-right: none; }
+  .mf-trust-cell:nth-child(2n) { border-right: none; }
   .mf-trust-cell:nth-child(1),
   .mf-trust-cell:nth-child(2) { border-bottom: 1px solid var(--mf-line); }
-}
-@media (max-width: 520px) {
-  .mf-trust { grid-template-columns: 1fr; }
-  .mf-trust-cell { border-right: none; border-bottom: 1px solid var(--mf-line); padding: 36px 24px; }
-  .mf-trust-cell:last-child { border-bottom: none; }
 }
 
 /* El antiguo header (no .header-v2) ya no existe, pero por si quedara
@@ -1978,11 +2009,15 @@ img, video, iframe { max-width: 100%; height: auto; }
   .mf-hero-scroll { display: none; }
 }
 
-/* ---- Trust v2 (4 celdas): refinar paddings en móvil ---- */
+/* ---- Trust v2 (4 celdas): mantener 2×2 en móvil con paddings reducidos ---- */
 @media (max-width: 480px) {
-  .mf-trust-cell { padding: 28px 20px; gap: 10px; }
-  .mf-trust-cell h3 { font-size: 16px; }
-  .mf-trust-cell p { font-size: 13.5px; }
+  .mf-trust { grid-template-columns: repeat(2, 1fr) !important; }
+  .mf-trust-cell { padding: 22px 14px; gap: 8px; }
+  .mf-trust-cell h3 { font-size: 15px; }
+  .mf-trust-cell p { font-size: 12.5px; line-height: 1.4; }
+  .mf-trust-num { font-size: 11px; }
+  .mf-trust-ico { width: 28px; height: 28px; }
+  .mf-trust-ico svg { width: 22px; height: 22px; }
 }
 
 /* ---- Productos: grids más sólidas en móvil ---- */
