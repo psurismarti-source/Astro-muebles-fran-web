@@ -23,9 +23,10 @@ function formatFecha(iso: string) {
 ---
 
 <Layout
-  title={`${noticia.titulo} | Muebles Fran Barcelona`}
-  description={noticia.resumen ?? ''}
-  ogImage={noticia.imagen?.asset?.url}
+  title={noticia.metaTitulo || `${noticia.titulo} | Muebles Fran Barcelona`}
+  description={noticia.metaDescripcion || noticia.resumen || ''}
+  ogImage={noticia.ogImageUrl || noticia.imagen?.asset?.url}
+  noIndex={noticia.noIndex ?? false}
 >
 
   <div class="page-hero">

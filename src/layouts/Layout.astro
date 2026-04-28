@@ -6,13 +6,19 @@ export interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  noIndex?: boolean;
 }
 
 const {
   title,
   description = 'Muebles Fran Barcelona — Tienda de muebles y decoración en Gran Vía 1105. Salones, dormitorios, cocinas, baños y juvenil.',
   ogImage = '/img/Logo-muebles-barcelona.jpg',
+  noIndex = false,
 } = Astro.props;
+
+const siteUrl = 'https://mueblesfran.barcelona';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
 const config = await sanityClient.fetch(QUERY_CONFIG).catch(() => null);
 const telefono     = config?.telefono  ?? '93 313 88 06';
@@ -26,11 +32,32 @@ const direccion    = config?.direccion ?? 'Gran Vía de les Corts Catalanes 1105
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {noIndex ? (
+    <meta name="robots" content="noindex, nofollow" />
+  ) : (
+    <meta name="robots" content="index, follow" />
+  )}
+  <title>{title}</title>
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Básico -->
   <meta name="description" content={description} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalUrl} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={ogImage} />
-  <title>{title}</title>
+  <meta property="og:image" content={ogImageAbsolute} />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Muebles Fran Barcelona" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageAbsolute} />
+
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="/additions.css" />
   <link rel="icon" type="image/jpeg" href="/img/Logo-muebles-barcelona.jpg" />

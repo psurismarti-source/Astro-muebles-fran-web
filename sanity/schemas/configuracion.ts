@@ -55,14 +55,36 @@ export default defineType({
       type: 'image',
       options: { hotspot: false },
     }),
+    // ── SEO GLOBAL ────────────────────────────────────────────────────
+    defineField({
+      name: 'metaTituloGlobal',
+      title: 'Meta título global',
+      type: 'string',
+      description: 'Título por defecto para buscadores cuando una página no tiene el suyo. Máx. 60 caracteres.',
+      validation: Rule => Rule.max(60).warning('Google corta títulos superiores a 60 caracteres'),
+      group: 'seo',
+    }),
     defineField({
       name: 'metaDescripcionGlobal',
-      title: 'Meta descripción global (SEO)',
+      title: 'Meta descripción global',
       type: 'text',
       rows: 2,
-      description: 'Descripción por defecto para redes sociales y buscadores.',
+      description: 'Descripción por defecto para buscadores y redes cuando una página no tiene la suya. Máx. 160 caracteres.',
       initialValue: 'Muebles Fran Barcelona — Tienda de muebles y decoración. Salones, dormitorios, cocinas, baños y juvenil. Gran Vía 1105.',
+      validation: Rule => Rule.max(160).warning('Google muestra como máximo 160 caracteres'),
+      group: 'seo',
     }),
+    defineField({
+      name: 'ogImageGlobal',
+      title: 'Imagen OG global (redes sociales)',
+      type: 'image',
+      options: { hotspot: false },
+      description: 'Imagen por defecto al compartir cualquier página en redes. Recomendado: 1200×630px.',
+      group: 'seo',
+    }),
+  ],
+  groups: [
+    { name: 'seo', title: '🔍 SEO Global' },
   ],
   preview: {
     select: { title: 'nombreEmpresa', subtitle: 'telefono', media: 'logo' },

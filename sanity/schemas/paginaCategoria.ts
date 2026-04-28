@@ -13,6 +13,7 @@ export default defineType({
       type: 'string',
       description: 'Ej: Armarios',
       validation: Rule => Rule.required(),
+      group: 'contenido',
     }),
     defineField({
       name: 'slug',
@@ -21,6 +22,7 @@ export default defineType({
       description: 'Debe coincidir con la ruta en la web. Ej: dormitorios/armarios',
       options: { source: 'titulo', maxLength: 96 },
       validation: Rule => Rule.required(),
+      group: 'contenido',
     }),
     defineField({
       name: 'categoria',
@@ -36,17 +38,20 @@ export default defineType({
         ],
       },
       validation: Rule => Rule.required(),
+      group: 'contenido',
     }),
     defineField({
       name: 'tag',
       title: 'Etiqueta pequeña (sobre el título)',
       type: 'string',
       description: 'Ej: Dormitorios · Armarios',
+      group: 'contenido',
     }),
     defineField({
       name: 'subtitulo',
       title: 'Subtítulo de la sección intro',
       type: 'string',
+      group: 'contenido',
     }),
     defineField({
       name: 'descripcion',
@@ -54,6 +59,7 @@ export default defineType({
       type: 'array',
       of: [{ type: 'block' }],
       description: 'Texto de la sección de presentación.',
+      group: 'contenido',
     }),
     defineField({
       name: 'caracteristicas',
@@ -61,6 +67,7 @@ export default defineType({
       type: 'array',
       of: [{ type: 'string' }],
       description: 'Puntos que aparecen en la lista de la sección intro.',
+      group: 'contenido',
     }),
     defineField({
       name: 'imagenPrincipal',
@@ -70,6 +77,7 @@ export default defineType({
       fields: [
         defineField({ name: 'alt', type: 'string', title: 'Texto alternativo' }),
       ],
+      group: 'contenido',
     }),
     defineField({
       name: 'galeriaExtra',
@@ -83,14 +91,47 @@ export default defineType({
         },
       ],
       description: 'Opcional: imágenes gestionadas desde aquí en lugar de la carpeta /img.',
+      group: 'contenido',
+    }),
+
+    // ── SEO ───────────────────────────────────────────────────────────
+    defineField({
+      name: 'metaTitulo',
+      title: 'Meta título',
+      type: 'string',
+      description: 'Título que aparece en Google. Máx. 60 caracteres. Ej: "Armarios y vestidores · Muebles Fran Barcelona".',
+      validation: Rule => Rule.max(60).warning('Google corta títulos superiores a 60 caracteres'),
+      group: 'seo',
     }),
     defineField({
       name: 'metaDescripcion',
-      title: 'Meta descripción SEO',
+      title: 'Meta descripción',
       type: 'text',
       rows: 2,
-      validation: Rule => Rule.max(160),
+      description: 'Descripción que aparece bajo el título en Google. Máx. 160 caracteres.',
+      validation: Rule => Rule.max(160).warning('Google muestra como máximo 160 caracteres'),
+      group: 'seo',
     }),
+    defineField({
+      name: 'ogImage',
+      title: 'Imagen para redes sociales',
+      type: 'image',
+      options: { hotspot: false },
+      description: 'Imagen al compartir en redes. Si está vacío se usa la imagen global. Recomendado: 1200×630px.',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'noIndex',
+      title: 'No indexar esta página',
+      type: 'boolean',
+      description: 'Actívalo solo si NO quieres que Google indexe esta página. Normalmente debe estar desactivado.',
+      initialValue: false,
+      group: 'seo',
+    }),
+  ],
+  groups: [
+    { name: 'contenido', title: '📝 Contenido', default: true },
+    { name: 'seo', title: '🔍 SEO' },
   ],
   preview: {
     select: { title: 'titulo', subtitle: 'categoria', media: 'imagenPrincipal' },
