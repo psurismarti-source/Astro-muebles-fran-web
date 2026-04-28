@@ -75,12 +75,17 @@ const direccion    = config?.direccion ?? 'Gran Vía de les Corts Catalanes 1105
     <div class="mobile-menu" id="mobileMenu">
       <a href="/">Inicio</a>
       <a href="/nosotros">Nosotros</a>
-      <span class="mobile-section-title">Muebles</span>
-      <a href="/salones" style="padding-left:36px;">— Salones</a>
-      <a href="/dormitorios" style="padding-left:36px;">— Dormitorios</a>
-      <a href="/juvenil" style="padding-left:36px;">— Juvenil</a>
-      <a href="/banos" style="padding-left:36px;">— Baños</a>
-      <a href="/cocinas" style="padding-left:36px;">— Cocinas</a>
+      <details class="mob-muebles">
+        <summary>
+          <span>Muebles</span>
+          <svg class="mob-muebles-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="3,4 6,8 9,4"/></svg>
+        </summary>
+        <a href="/salones">— Salones</a>
+        <a href="/dormitorios">— Dormitorios</a>
+        <a href="/juvenil">— Juvenil</a>
+        <a href="/banos">— Baños</a>
+        <a href="/cocinas">— Cocinas</a>
+      </details>
       <a href="/novedades">Blog</a>
       <a href="/#contacto">Contacto</a>
       <div class="mobile-menu-ctas">
