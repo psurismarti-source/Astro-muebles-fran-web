@@ -65,6 +65,11 @@ const contactoTitulo    = data?.contactoTitulo    ?? 'Visítanos en tienda';
 const contactoSubtitulo = data?.contactoSubtitulo ?? 'Estamos en Barcelona, listos para atenderte. Ven a conocer nuestra exposición y encuentra el mueble perfecto para tu hogar.';
 const docId = data?._id ?? 'pagina-inicio-singleton';
 
+// Reseñas (TrustIndex): por defecto cargamos el widget. Sanity puede sobreescribirlo si pegan otro embed.
+const resenasTitulo    = data?.resenasTitulo    ?? 'Lo que dicen nuestros clientes';
+const resenasSubtitulo = data?.resenasSubtitulo ?? 'Opiniones verificadas en Google de quienes ya nos conocen';
+const resenasEmbed = data?.resenasEmbed ?? `<script defer async src="https://cdn.trustindex.io/loader.js?953252d70904660e8c860cf7b67"></script>`;
+
 // Ventajas: usa Sanity si existen, si no los valores por defecto
 const ventajas = data?.ventajas?.length > 0 ? data.ventajas : [
   { _key: 'v1', icono: '⭐', titulo: 'Calidad garantizada',    descripcion: 'Trabajamos con fabricantes de confianza para ofrecerte muebles duraderos.' },
@@ -218,18 +223,18 @@ const ventajas = data?.ventajas?.length > 0 ? data.ventajas : [
   </section>
 
   <!-- ===== RESEÑAS (Google Reviews / TrustIndex) ===== -->
-  {data?.resenasEmbed && (
+  {resenasEmbed && (
     <section id="resenas" class="mf-resenas-section">
       <div class="container">
         <div class="mf-resenas-header" style="text-align:center; margin-bottom:40px;">
           <h2 class="section-title" data-sanity={ds(docId, 'paginaInicio', 'resenasTitulo')}>
-            {data?.resenasTitulo ?? 'Lo que dicen nuestros clientes'}
+            {resenasTitulo}
           </h2>
           <p class="section-subtitle" data-sanity={ds(docId, 'paginaInicio', 'resenasSubtitulo')}>
-            {data?.resenasSubtitulo ?? 'Opiniones verificadas en Google'}
+            {resenasSubtitulo}
           </p>
         </div>
-        <div class="mf-resenas-embed" set:html={data.resenasEmbed} />
+        <div class="mf-resenas-embed" set:html={resenasEmbed} />
       </div>
     </section>
   )}
