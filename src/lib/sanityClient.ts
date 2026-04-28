@@ -67,7 +67,8 @@ export const QUERY_PAGINA_INICIO = `
     resenasTitulo, resenasSubtitulo, resenasEmbed,
     blogTitulo, blogSubtitulo,
     parkingTitulo, parkingDescripcion, parkingCta,
-    contactoTitulo, contactoSubtitulo
+    contactoTitulo, contactoSubtitulo,
+    metaTitulo, metaDescripcion, "ogImageUrl": ogImage.asset->url, noIndex
   }
 `;
 
@@ -78,7 +79,8 @@ export const QUERY_PAGINA_NOSOTROS = `
     heroTag, heroTitulo, heroSubtitulo,
     historiaTag, historiaTitulo, historiaParrafo1, historiaParrafo2,
     compromisoTag, compromisoTitulo, compromisoParrafo1, compromisoParrafo2,
-    ctaTitulo, ctaSubtitulo
+    ctaTitulo, ctaSubtitulo,
+    metaTitulo, metaDescripcion, "ogImageUrl": ogImage.asset->url, noIndex
   }
 `;
 
@@ -87,7 +89,9 @@ export const QUERY_CONFIG = `
   *[_type == "configuracion" && _id == "configuracion-singleton"][0] {
     _id,
     nombreEmpresa, telefono, whatsapp, email, direccion, horario,
-    logo { asset->{ url } }
+    logo { asset->{ url } },
+    metaTituloGlobal, metaDescripcionGlobal,
+    "ogImageGlobalUrl": ogImageGlobal.asset->url
   }
 `;
 
@@ -110,12 +114,13 @@ export const QUERY_NOTICIAS_RECIENTES = (n = 3) => `
 /** Página de categoría por slug (= galeriaFolder) */
 export const QUERY_PAGINA_CATEGORIA = `
   *[_type == "paginaCategoria" && slug.current == $slug][0] {
-    _id, titulo, tag, subtitulo, caracteristicas, metaDescripcion,
+    _id, titulo, tag, subtitulo, caracteristicas,
     "parrafos": descripcion[_type == "block"][]{
       "texto": pt::text(@)
     },
     imagenPrincipal { asset->{ url }, alt },
-    galeriaExtra[] { asset->{ url }, alt }
+    galeriaExtra[] { asset->{ url }, alt },
+    metaTitulo, metaDescripcion, "ogImageUrl": ogImage.asset->url, noIndex
   }
 `;
 
@@ -123,7 +128,8 @@ export const QUERY_PAGINA_CATEGORIA = `
 export const QUERY_NOTICIA_BY_SLUG = `
   *[_type == "noticia" && slug.current == $slug][0] {
     _id, titulo, "slug": slug.current, fecha, resumen, contenido,
-    imagen { asset->{ url } }
+    imagen { asset->{ url } },
+    metaTitulo, metaDescripcion, "ogImageUrl": ogImage.asset->url, noIndex
   }
 `;
 

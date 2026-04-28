@@ -11,6 +11,7 @@ export default defineType({
       title: 'Título',
       type: 'string',
       validation: Rule => Rule.required().min(5).max(120),
+      group: 'contenido',
     }),
     defineField({
       name: 'slug',
@@ -22,6 +23,7 @@ export default defineType({
         maxLength: 96,
       },
       validation: Rule => Rule.required(),
+      group: 'contenido',
     }),
     defineField({
       name: 'fecha',
@@ -29,6 +31,7 @@ export default defineType({
       type: 'datetime',
       initialValue: () => new Date().toISOString(),
       validation: Rule => Rule.required(),
+      group: 'contenido',
     }),
     defineField({
       name: 'imagen',
@@ -43,6 +46,7 @@ export default defineType({
           validation: Rule => Rule.required(),
         }),
       ],
+      group: 'contenido',
     }),
     defineField({
       name: 'resumen',
@@ -51,11 +55,13 @@ export default defineType({
       rows: 3,
       description: 'Aparece en el listado del blog y en redes sociales.',
       validation: Rule => Rule.max(200),
+      group: 'contenido',
     }),
     defineField({
       name: 'contenido',
       title: 'Contenido del artículo',
       type: 'array',
+      group: 'contenido',
       of: [
         {
           type: 'block',
@@ -90,6 +96,45 @@ export default defineType({
         },
       ],
     }),
+  ],
+    // ── SEO ───────────────────────────────────────────────────────────
+    defineField({
+      name: 'metaTitulo',
+      title: 'Meta título (opcional)',
+      type: 'string',
+      description: 'Si está vacío se usa el título del artículo. Máx. 60 caracteres.',
+      validation: Rule => Rule.max(60).warning('Google corta títulos superiores a 60 caracteres'),
+      group: 'seo',
+    }),
+    defineField({
+      name: 'metaDescripcion',
+      title: 'Meta descripción (opcional)',
+      type: 'text',
+      rows: 2,
+      description: 'Si está vacío se usa el resumen del artículo. Máx. 160 caracteres.',
+      validation: Rule => Rule.max(160).warning('Google muestra como máximo 160 caracteres'),
+      group: 'seo',
+    }),
+    defineField({
+      name: 'ogImage',
+      title: 'Imagen para redes sociales (opcional)',
+      type: 'image',
+      options: { hotspot: false },
+      description: 'Si está vacío se usa la imagen principal del artículo. Recomendado: 1200×630px.',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'noIndex',
+      title: 'No indexar este artículo',
+      type: 'boolean',
+      description: 'Actívalo solo si NO quieres que Google indexe este artículo. Normalmente debe estar desactivado.',
+      initialValue: false,
+      group: 'seo',
+    }),
+  ],
+  groups: [
+    { name: 'contenido', title: '📝 Contenido', default: true },
+    { name: 'seo', title: '🔍 SEO' },
   ],
   preview: {
     select: { title: 'titulo', media: 'imagen', date: 'fecha' },

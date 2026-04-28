@@ -109,6 +109,41 @@ export default defineType({
       initialValue: 'Visítanos en nuestra tienda de Barcelona o escríbenos. Estaremos encantados de ayudarte.',
       group: 'cta',
     }),
+
+    // ── SEO ───────────────────────────────────────────────────────────
+    defineField({
+      name: 'metaTitulo',
+      title: 'Meta título',
+      type: 'string',
+      description: 'Título que aparece en Google y en la pestaña del navegador. Máx. 60 caracteres.',
+      validation: Rule => Rule.max(60).warning('Google corta títulos superiores a 60 caracteres'),
+      group: 'seo',
+    }),
+    defineField({
+      name: 'metaDescripcion',
+      title: 'Meta descripción',
+      type: 'text',
+      rows: 2,
+      description: 'Descripción que aparece bajo el título en Google. Máx. 160 caracteres.',
+      validation: Rule => Rule.max(160).warning('Google muestra como máximo 160 caracteres'),
+      group: 'seo',
+    }),
+    defineField({
+      name: 'ogImage',
+      title: 'Imagen para redes sociales',
+      type: 'image',
+      options: { hotspot: false },
+      description: 'Imagen al compartir en redes. Si está vacío se usa la imagen global. Recomendado: 1200×630px.',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'noIndex',
+      title: 'No indexar esta página',
+      type: 'boolean',
+      description: 'Actívalo solo si NO quieres que Google indexe esta página. Normalmente debe estar desactivado.',
+      initialValue: false,
+      group: 'seo',
+    }),
   ],
 
   groups: [
@@ -116,5 +151,6 @@ export default defineType({
     { name: 'historia', title: '📖 Nuestra Historia' },
     { name: 'compromiso', title: '🤝 Compromiso' },
     { name: 'cta', title: '📣 CTA Final' },
+    { name: 'seo', title: '🔍 SEO' },
   ],
 })

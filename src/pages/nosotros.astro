@@ -18,11 +18,19 @@ const compromisoP2     = data?.compromisoParrafo2 ?? 'Nuestros profesionales con
 const ctaTitulo    = data?.ctaTitulo    ?? '¿Listo para renovar tu hogar?';
 const ctaSubtitulo = data?.ctaSubtitulo ?? 'Visítanos en nuestra tienda de Barcelona o escríbenos. Estaremos encantados de ayudarte.';
 const docId = data?._id ?? 'pagina-nosotros-singleton';
+
+// SEO — usa Sanity si existe, si no los valores por defecto
+const seoTitulo      = data?.metaTitulo      ?? 'Sobre Nosotros | Muebles Fran Barcelona';
+const seoDescripcion = data?.metaDescripcion ?? 'Conoce Muebles Fran, tienda familiar de muebles en Barcelona con años de experiencia asesorando a nuestros clientes. Ubicados en Gran Vía 1105, Barcelona.';
+const seoOgImage     = data?.ogImageUrl      ?? '/img/Logo-muebles-barcelona.jpg';
+const seoNoIndex     = data?.noIndex         ?? false;
 ---
 
 <Layout
-  title="Sobre Nosotros | Muebles Fran Barcelona"
-  description="Conoce Muebles Fran, tienda familiar de muebles en Barcelona con años de experiencia asesorando a nuestros clientes. Ubicados en Gran Vía 1105, Barcelona."
+  title={seoTitulo}
+  description={seoDescripcion}
+  ogImage={seoOgImage}
+  noIndex={seoNoIndex}
 >
 
   <!-- ===== BREADCRUMB ===== -->
