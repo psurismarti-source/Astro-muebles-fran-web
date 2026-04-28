@@ -2187,3 +2187,267 @@ img, video, iframe { max-width: 100%; height: auto; }
 @media (max-width: 480px) {
   .wa-btn, [class*="wa-float"] { right: 14px !important; bottom: 14px !important; }
 }
+
+/* ============================================================
+   MOBILE UX/UI — secciones restantes (ventajas, parking, contacto, blog, footer)
+   Patrón consistente con trust 2x2 y productos 2 cols.
+   ============================================================ */
+
+/* ---- Ventajas: 4 cards en 2x2 con icono circular oscuro ---- */
+@media (max-width: 600px) {
+  body .ventajas-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  body .ventaja {
+    padding: 20px 12px !important;
+    border-radius: 8px !important;
+    background: #f4f4f4;
+    border: none !important;
+    text-align: center;
+  }
+  body .ventaja-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--mf-ink, #0a0a0a);
+    border-radius: 50%;
+    margin: 0 auto 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+  }
+  body .ventaja h3 {
+    font-size: 13px;
+    line-height: 1.25;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  body .ventaja p {
+    font-size: 11.5px;
+    line-height: 1.4;
+    color: var(--mf-grey-2, #6b6b6b);
+    margin: 0;
+  }
+}
+@media (max-width: 380px) {
+  body .ventajas-grid { gap: 7px; }
+  body .ventaja { padding: 16px 10px !important; }
+  body .ventaja-icon { width: 34px; height: 34px; }
+  body .ventaja h3 { font-size: 12px; }
+  body .ventaja p { font-size: 11px; }
+}
+
+/* ---- Parking banner: vertical con icono + texto + CTA full-width ---- */
+@media (max-width: 600px) {
+  body .parking-banner-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 18px 0;
+    text-align: left;
+  }
+  body .parking-banner-icon {
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0;
+  }
+  body .parking-banner-icon svg { width: 16px; height: 16px; }
+  body .parking-banner-text {
+    flex: 1;
+  }
+  body .parking-banner-text strong {
+    font-size: 13px;
+    display: block;
+    margin-bottom: 2px;
+  }
+  body .parking-banner-text span {
+    font-size: 11px;
+    line-height: 1.4;
+    color: rgba(255,255,255,.65);
+  }
+  body .parking-banner-cta {
+    width: 100%;
+    padding: 11px 14px !important;
+    font-size: 12px !important;
+    text-align: center;
+    justify-content: center;
+  }
+  /* Layout: icono y texto en horizontal, CTA debajo full width */
+  body .parking-banner-inner > .parking-banner-icon,
+  body .parking-banner-inner > .parking-banner-text {
+    display: flex;
+    align-items: center;
+  }
+  /* Reorganizar con flex wrap para que icono y texto vayan juntos */
+  body .parking-banner-inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "icon text" "cta cta";
+    gap: 10px 12px;
+  }
+  body .parking-banner-inner .parking-banner-icon { grid-area: icon; }
+  body .parking-banner-inner .parking-banner-text { grid-area: text; }
+  body .parking-banner-inner .parking-banner-cta { grid-area: cta; }
+}
+
+/* ---- Contacto: CTAs grandes en 2x2 (Llamar+WA arriba, Cómo llegar abajo) ---- */
+@media (max-width: 600px) {
+  body .contacto-info h2 { font-size: 22px !important; text-align: left; }
+  body .contacto-info > p { font-size: 13px !important; margin-bottom: 18px !important; }
+
+  /* Datos de contacto compactos */
+  body .contacto-dato {
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+  }
+  body .contacto-dato-icon {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  body .contacto-dato-icon svg { width: 14px; height: 14px; }
+  body .contacto-dato-text strong {
+    font-size: 10.5px !important;
+    margin-bottom: 1px;
+  }
+  body .contacto-dato-text span,
+  body .contacto-dato-text a {
+    font-size: 13px !important;
+    line-height: 1.4;
+  }
+
+  /* CTAs grandes en grid 2x2 */
+  body .contacto-ctas-grandes {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "directions wa" "llamar llamar";
+    gap: 8px !important;
+    margin-top: 18px !important;
+  }
+  body .cta-grande {
+    padding: 12px 10px !important;
+    border-radius: 12px !important;
+    gap: 8px !important;
+    flex-direction: row;
+    justify-content: center;
+  }
+  body .cta-grande-icon {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  body .cta-grande-icon svg { width: 14px; height: 14px; }
+  body .cta-grande-text {
+    flex: 0 1 auto;
+    align-items: flex-start;
+  }
+  body .cta-grande-label { font-size: 12px !important; line-height: 1.1; }
+  body .cta-grande-sub { font-size: 10px !important; }
+  body .cta-grande-arrow { display: none; }
+
+  body .cta-grande.cta-negro    { grid-area: directions; }
+  body .cta-grande.cta-whatsapp { grid-area: wa; }
+  body .cta-grande.cta-llamar   { grid-area: llamar; }
+
+  /* Mapa más bajo en móvil para no robar pantalla */
+  body .mapa-wrapper iframe { height: 220px !important; }
+}
+
+/* ---- Blog (3 últimas en home): pasar a formato lista compacto ---- */
+@media (max-width: 600px) {
+  body .blog-grid {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0 !important;
+  }
+  body .blog-grid .blog-card {
+    flex-direction: row !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    border-bottom: 0.5px solid var(--mf-line, #e4e2dd) !important;
+    padding: 12px 0;
+    align-items: stretch;
+  }
+  body .blog-grid .blog-card:last-child { border-bottom: none !important; }
+  body .blog-grid .blog-card:hover { transform: none !important; box-shadow: none !important; }
+
+  body .blog-grid .blog-img {
+    width: 88px !important;
+    min-width: 88px;
+    height: 70px !important;
+    border-radius: 6px !important;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-right: 12px;
+  }
+  body .blog-grid .blog-img img {
+    object-fit: cover;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  body .blog-grid .blog-info {
+    flex: 1;
+    min-width: 0;
+    padding: 2px 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  body .blog-grid .blog-cat {
+    font-size: 9.5px !important;
+    color: var(--mf-grey-3, #9a9a9a) !important;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  body .blog-grid .blog-info h3 {
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+    font-weight: 500;
+    margin: 0 !important;
+    /* Truncar a 2 líneas */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: var(--mf-ink, #0a0a0a);
+  }
+  body .blog-grid .blog-info p,
+  body .blog-grid .blog-link {
+    display: none !important;  /* En móvil sólo título y fecha, simplifica scan */
+  }
+}
+
+/* ---- Footer: stack vertical ordenado con tipografía compacta ---- */
+@media (max-width: 600px) {
+  body .footer-inner {
+    display: flex !important;
+    flex-direction: column;
+    gap: 18px !important;
+    margin-bottom: 22px !important;
+  }
+  body .footer-inner > div {
+    width: 100%;
+  }
+  body .footer-logo-img { height: 30px !important; margin-bottom: 6px; }
+  body .footer-tagline { font-size: 11px !important; }
+  body .footer-links h4 {
+    font-size: 10px !important;
+    letter-spacing: 0.18em;
+    margin-bottom: 8px !important;
+    color: rgba(255,255,255,.5) !important;
+  }
+  body .footer-links ul { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  body .footer-links li {
+    margin-bottom: 0 !important;
+    font-size: 12px !important;
+  }
+  body .footer-links li a, body .footer-links li span { font-size: 12px !important; }
+  body .footer-bottom {
+    font-size: 10.5px !important;
+    padding-top: 14px !important;
+    text-align: center;
+  }
+}
